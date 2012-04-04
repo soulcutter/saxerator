@@ -6,10 +6,12 @@ Gem::Specification.new do |s|
   s.name        = "saxerator"
   s.version     = Saxerator::VERSION
   s.authors     = ["Bradley Schaefer"]
-  s.email       = ["brschaefer@stubhub.com"]
+  s.email       = ["bradley.schaefer@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = 'A SAX-based XML parser for parsing large files into manageable chunks'
+  s.description = 'A SAX-based XML parser for parsing large files into manageable chunks'
+
+  s.required_ruby_version = ">= 1.9.2"
 
   s.rubyforge_project = "saxerator"
 
@@ -18,7 +20,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "guard"
+  s.add_development_dependency "guard-bundler"
+  s.add_development_dependency "guard-rspec"
+  s.add_development_dependency "simplecov"
 end
