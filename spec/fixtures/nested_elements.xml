@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+  <id>/blog</id>
+  <link type="text/html" href="https://example.com/blog" rel="alternate"/>
+  <link type="application/atom+xml" href="https://example.com/blog.atom" rel="self"/>
+  <title>Example Blog</title>
+  <updated>2012-01-01T16:17:00-06:00</updated>
+  <entry>
+    <id>1</id>
+    <published>2012-01-01T16:17:00-06:00</published>
+    <updated>2012-01-01T16:17:00-06:00</updated>
+    <link type="text/html" href="https://example.com/blog/how-to-eat-an-airplane" rel="alternate"/>
+    <title>How to eat an airplane</title>
+    <content type="html">&lt;p&gt;Airplanes are very large, which can present difficulty in digestion.&lt;/p&gt;
+
+      &lt;p&gt;The key is to break it down into bite-sized portions and go slowly.&lt;/p&gt;
+    </content>
+    <media:thumbnail url="http://www.gravatar.com/avatar/a9eb6ba22e482b71b266daadf9c9a080?s=80"/>
+    <author>
+      <name>Soulcutter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>2</id>
+    <published>2012-01-02T18:19:00-06:00</published>
+    <updated>2012-01-02T18:19:00-06:00</updated>
+    <link type="text/html" href="https://example.com/blog/sample-data-is-hard-work" rel="alternate"/>
+    <title>Sample data is hard work</title>
+    <content type="html">&lt;p&gt;People don't believe me when I tell them how tedious it is.&lt;/p&gt;</content>
+    <media:thumbnail url="http://www.gravatar.com/avatar/742798d92b705cfeba3937e122974982?s=80"/>
+    <author>
+      <name>Bradley Schaefer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>3</id>
+    <published>2012-01-15T21:22:00-06:00</published>
+    <updated>2012-01-15T21:22:00-06:00</updated>
+    <link type="text/html" href="https://example.com/blog/three-should-be-enough" rel="alternate"/>
+    <title>Three should be enough</title>
+    <content type="html">&lt;p&gt;EOM&lt;/p&gt;</content>
+    <media:thumbnail url="http://www.gravatar.com/avatar/a9eb6ba22e482b71b266daadf9c9a080?s=80"/>
+    <author>
+      <name>Soulcutter</name>
+    </author>
+  </entry>
+</feed>
