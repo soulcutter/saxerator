@@ -28,20 +28,17 @@ module Saxerator
       end
 
       class Document < ::Nokogiri::XML::SAX::Document
-        attr_accessor :parser
+        attr_accessor :stack
 
         def initialize(config, tag)
           @config = config
           @tag = tag
-        end
-
-        def stack
-          @stack ||= []
+          @stack = []
         end
 
         def start_element(name, attrs = [])
           if stack.size > 0 || name == @tag
-            stack.push Saxerator::XmlNode.new(parser, name, Hash[*attrs.flatten])
+            stack.push Saxerator::XmlNode.new(@config, name, Hash[*attrs.flatten])
           end
         end
 

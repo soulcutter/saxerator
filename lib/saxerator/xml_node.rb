@@ -2,8 +2,8 @@ module Saxerator
   class XmlNode
     attr_accessor :name, :attributes, :children, :type
 
-    def initialize(parser, name, attributes)
-      @parser = parser
+    def initialize(config, name, attributes)
+      @config = config
       self.name = name
       self.attributes = attributes
       self.children = []
