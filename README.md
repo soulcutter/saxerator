@@ -10,7 +10,7 @@ Examples
 
 ```ruby
 Saxerator.parser(File.new("rss.xml")).for_tag(:item).each do |item|
-    puts "#{item['title']}: #{item['author']"
+    puts "#{item['title']}: #{item['author']}"
 end
 ```
 
