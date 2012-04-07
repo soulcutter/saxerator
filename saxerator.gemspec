@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
 require 'saxerator/version'
-require 'rubygems/package_task'
+require 'rake' # for FileList
 
 Gem::Specification.new do |s|
   s.name        = 'saxerator'
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'nokogiri'
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-bundler'
