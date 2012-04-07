@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     'saxerator.gemspec',
     'lib/**/*.rb',
     'spec/**/*.*',
+    'benchmark/**/*.rb',
     'Gemfile',
     'Guardfile',
     'Rakefile',
@@ -39,4 +40,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-bundler'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'ipsum'
 end
