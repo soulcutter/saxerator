@@ -1,5 +1,12 @@
 require "saxerator/version"
+require 'saxerator/configuration'
+require 'saxerator/xml_node'
+require 'saxerator/parser/nokogiri'
 
 module Saxerator
-  # Your code goes here...
+  extend self
+
+  def parser(xml)
+    Saxerator::Configuration.new(xml)
+  end
 end
