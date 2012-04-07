@@ -45,8 +45,8 @@ describe Saxerator do
       subject { parser.for_tag(:entry).first }
 
       specify { subject['title'].should == 'How to eat an airplane' }
-      specify { subject['contributor'].should == {'name' => 'Jane Doe'} }
-      specify { subject['author'].should == [{'name' => 'Soulcutter'}, {'name' => 'Soulcuttr'}] }
+      specify { subject['author'].should == {'name' => 'Soulcutter'} }
+      specify { subject['contributor'].should == [{'name' => 'Jane Doe'}, {'name' => 'Leviticus Alabaster'}] }
     end
   end
 end
