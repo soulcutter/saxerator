@@ -42,12 +42,11 @@ describe Saxerator do
 
     context "with a file with nested elements" do
       let(:xml) { fixture_file('nested_elements.xml') }
+      subject { parser.for_tag(:entry).first }
 
-      it "should give access to nested elements" do
-        pending do
-          subject.for_tag(:entry).first['title'].should == 'How to eat an airplane'
-        end
-      end
+      specify { subject['title'].should == 'How to eat an airplane' }
+      specify { subject['contributor'].should == {'name' => 'Jane Doe'} }
+      specify { subject['author'].should == [{'name' => 'Soulcutter'}, {'name' => 'Soulcuttr'}] }
     end
   end
 end

@@ -16,7 +16,23 @@ module Saxerator
     end
 
     def to_hash
-      children.join(' ') if @text
+      if @text
+        return children.join(' ')
+      else
+        out = {}
+        @children.each do |child|
+          name = child.name
+          if out[name]
+            if !out[name].is_a?(Array)
+              out[name] = [out[name]]
+            end
+            out[name] << child.to_hash
+          else
+            out[name] = child.to_hash
+          end
+        end
+        out
+      end
     end
   end
 end
