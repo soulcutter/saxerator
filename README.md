@@ -3,30 +3,40 @@ Saxerator
 
 Saxerator is a SAX-based xml parser designed for parsing very large files into manageable chunks. Rather than
 dealing directly with SAX callback methods, Saxerator gives you Enumerable access to chunks of an xml document.
-This approach is ideal for large xml files that represent a collection of elements.
+This approach is ideal for large xml files containing a collection of elements that you can process
+independently.
+
+Each xml chunk is parsed into a JSON-like Ruby Hash structure for consumption.
 
 Examples
 --------
 
 ```ruby
-Saxerator.parser(File.new("rss.xml")).for_tag(:item).each do |item|
-    puts "#{item['title']}: #{item['author']}"
+parser = Saxerator.parser(File.new("rss.xml"))
+
+parser.for_tag(:item).each do |item|
+  # where the xml contains <item><title>...</title><author>...</author></item>
+  # item will look like {'title' => '...', 'author' => '...'}
+  puts "#{item['title']}: #{item['author']}"
 end
+
+# a String is returned here since the given element contains only character data
+puts "First title: #{parser.for_tag(:title).first}"
 ```
 
 Compatibility
 -------------
-This library is known to work with the following rubies:
+Known compatible rubies:
 
 * MRI 1.9.3-p125
 * MRI 1.9.2-p318
 * JRuby 1.6.7 (with JRUBY_OPTS=--1.9)
 
-Saxerator may work with other versions with support for Fiber.
-
 Known incompatible rubies:
 
 * MRI 1.9.2-p290 (Fiber segfaults)
+
+Saxerator may work with other rubies that support Fiber.
 
 FAQ
 ---
