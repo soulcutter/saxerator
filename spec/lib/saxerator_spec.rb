@@ -38,6 +38,14 @@ describe Saxerator do
         subject.for_tag(:blurb).each { |x| results << x }
         results.should == ['one', 'two', 'three']
       end
+
+      it "should allow multiple operations on the same parser" do
+        # This exposes a bug where if a File is not reset only the first
+        # Enumerable method works as expected
+        subject.for_tag(:blurb).first.should == 'one'
+        subject.for_tag(:blurb).first.should == 'one'
+      end
+
     end
 
     context "with a file with nested elements" do

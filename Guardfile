@@ -5,7 +5,7 @@ guard :bundler do
   watch(/^saxerator\.gemspec$/)
 end
 
-guard :rspec, :cli => '--color --format doc' do
+guard :rspec, :cli => '--color' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch(%r{^spec/fixtures/.+\.xml$}) { :spec }

@@ -13,27 +13,23 @@ module Saxerator
       end
 
       def each(&block)
-        begin
-          fiber = Fiber.new do
-            document = Document.new(@config, @tag)
-            parser = ::Nokogiri::XML::SAX::Parser.new document
-            parser.parse(@source)
-          end
-          while fiber.alive? do
-            result = fiber.resume
-            yield(result) unless result.nil?
-          end
-        rescue FiberError
-        end
+        document = Document.new(@config, @tag, block)
+        parser = ::Nokogiri::XML::SAX::Parser.new document
+
+        # Always have to start at the beginning of a File
+        @source.rewind if(@source.is_a?(File))
+
+        parser.parse(@source)
       end
 
       class Document < ::Nokogiri::XML::SAX::Document
         attr_accessor :stack
 
-        def initialize(config, tag)
+        def initialize(config, tag, block)
           @config = config
           @tag = tag
           @stack = []
+          @block = block
         end
 
         def start_element(name, attrs = [])
@@ -47,7 +43,7 @@ module Saxerator
             last = stack.pop
             stack.last.add_node last
           elsif stack.size == 1
-            Fiber.yield(stack.pop.to_hash)
+            @block.yield(stack.pop.to_hash)
           end
         end
 

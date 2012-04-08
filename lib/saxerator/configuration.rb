@@ -7,8 +7,7 @@ module Saxerator
     end
 
     def for_tag(tag)
-      tag = tag.to_s
-      Saxerator::Parser::Nokogiri.new(self, source, tag)
+      Saxerator::Parser::Nokogiri.new(self, source, tag.to_s)
     end
   end
 end
