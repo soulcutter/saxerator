@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'fiber'
 
 module Saxerator
   module Parser

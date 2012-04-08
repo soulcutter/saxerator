@@ -32,12 +32,6 @@ Known compatible rubies:
 * MRI 1.9.2-p318
 * JRuby 1.6.7 (with JRUBY_OPTS=--1.9)
 
-Known incompatible rubies:
-
-* MRI 1.9.2-p290 (Fiber segfaults)
-
-Saxerator may work with other rubies that support Fiber.
-
 FAQ
 ---
 Why the name 'Saxerator'?
