@@ -18,8 +18,6 @@ Gem::Specification.new do |s|
   eos
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 1.9.2'
-
   s.rubyforge_project = 'saxerator'
 
   s.files = FileList[
