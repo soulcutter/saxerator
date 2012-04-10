@@ -17,7 +17,7 @@ module Saxerator
 
     def to_hash
       if @text
-        return children.join(' ')
+        return children.join
       else
         out = {}
         @children.each do |child|

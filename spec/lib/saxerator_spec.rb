@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Saxerator do
@@ -55,6 +57,7 @@ describe Saxerator do
       specify { subject['title'].should == 'How to eat an airplane' }
       specify { subject['author'].should == {'name' => 'Soulcutter'} }
       specify { subject['contributor'].should == [{'name' => 'Jane Doe'}, {'name' => 'Leviticus Alabaster'}] }
+      specify { subject['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
     end
   end
 end
