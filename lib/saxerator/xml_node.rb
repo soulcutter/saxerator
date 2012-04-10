@@ -15,20 +15,29 @@ module Saxerator
       children << node
     end
 
+    def to_s
+      string = StringWithAttributes.new(@text ? children.join : children.to_s)
+      string.attributes = attributes
+      string
+    end
+
     def to_hash
       if @text
-        return children.join
+        to_s
       else
-        out = {}
+        out = HashWithAttributes.new
+        out.attributes = attributes
+
         @children.each do |child|
           name = child.name
+          element = child.to_hash
           if out[name]
             if !out[name].is_a?(Array)
               out[name] = [out[name]]
             end
-            out[name] << child.to_hash
+            out[name] << element
           else
-            out[name] = child.to_hash
+            out[name] = element
           end
         end
         out

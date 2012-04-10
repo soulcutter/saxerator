@@ -58,6 +58,9 @@ describe Saxerator do
       specify { subject['author'].should == {'name' => 'Soulcutter'} }
       specify { subject['contributor'].should == [{'name' => 'Jane Doe'}, {'name' => 'Leviticus Alabaster'}] }
       specify { subject['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
+      specify { subject['content'].attributes['type'].should == 'html' }
+      specify { subject['contributor'][0].attributes['type'].should == 'primary' }
+      specify { subject['contributor'][0]['name'].should == 'Jane Doe' }
     end
   end
 end

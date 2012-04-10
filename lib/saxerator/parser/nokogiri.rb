@@ -33,7 +33,7 @@ module Saxerator
 
         def start_element(name, attrs = [])
           if stack.size > 0 || name == @tag
-            stack.push Saxerator::XmlNode.new(@config, name, Hash[*attrs.flatten])
+            stack.push XmlNode.new(@config, name, Hash[*attrs.flatten])
           end
         end
 

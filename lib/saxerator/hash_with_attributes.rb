@@ -1,5 +1,5 @@
 module Saxerator
-  class StringWithAttributes < String
+  class HashWithAttributes < Hash
     include Saxerator::Attributes
   end
 end
