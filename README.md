@@ -1,7 +1,7 @@
 Saxerator
 =========
 
-Saxerator is a SAX-based xml parser designed for parsing very large files into manageable chunks. Rather than
+Saxerator is a SAX-based xml-to-hash parser designed for parsing very large files into manageable chunks. Rather than
 dealing directly with SAX callback methods, Saxerator gives you Enumerable access to chunks of an xml document.
 This approach is ideal for large xml files containing a collection of elements that you can process
 independently.
@@ -22,6 +22,18 @@ end
 
 # a String is returned here since the given element contains only character data
 puts "First title: #{parser.for_tag(:title).first}"
+```
+
+```ruby
+# attributes are stored as a part of the Hash or String object they relate to
+
+# author behaves like a String here, but also responds to .attributes
+primary_authors = parser.for_tag(:author).select { |author| author.attributes['type'] == 'primary' }
+puts "Primary authors: #{primary_authors.join(", ")}"
+
+# item behaves like a Hash, but also responds to .attributes
+favorite_items = parser.for_tag(:item).select { |item| item.attributes['favorite'] }
+puts "First favorite title: #{favorite_items[0]['title']}"
 ```
 
 Compatibility
