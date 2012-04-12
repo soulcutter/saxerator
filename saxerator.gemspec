@@ -30,13 +30,14 @@ Gem::Specification.new do |s|
     'Gemfile',
     'Rakefile',
     '.rvmrc',
-    '.gitignore'
+    '.gitignore',
+    '.travis.yml'
   ]
   s.test_files    = FileList['spec/**/*.*']
   s.executables   = []
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'nokogiri'
+  s.add_runtime_dependency 'nokogiri', '>= 1.4.0'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
