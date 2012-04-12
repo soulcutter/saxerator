@@ -1,7 +1,6 @@
 require "saxerator/version"
 require 'saxerator/configuration'
 
-require 'saxerator/attributes'
 require 'saxerator/string_with_attributes'
 require 'saxerator/hash_with_attributes'
 

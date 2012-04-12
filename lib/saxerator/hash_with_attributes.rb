@@ -1,5 +1,5 @@
 module Saxerator
   class HashWithAttributes < Hash
-    include Saxerator::Attributes
+    attr_accessor :attributes
   end
 end

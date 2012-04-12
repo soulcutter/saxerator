@@ -1,5 +1,5 @@
 module Saxerator
   class StringWithAttributes < String
-    include Saxerator::Attributes
+    attr_accessor :attributes
   end
 end
