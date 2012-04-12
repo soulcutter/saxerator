@@ -10,6 +10,12 @@ Each xml chunk is parsed into a JSON-like Ruby Hash structure for consumption.
 
 Examples
 --------
+You can parse any valid xml in 3 simple steps.
+
+1. Initialize the parser
+1. Tell it which tag you care about
+1. Perform your work in an 'each' block, or using any [Enumerable](http://apidock.com/ruby/Enumerable)
+method
 
 ```ruby
 parser = Saxerator.parser(File.new("rss.xml"))
@@ -24,16 +30,14 @@ end
 puts "First title: #{parser.for_tag(:title).first}"
 ```
 
-```ruby
-# attributes are stored as a part of the Hash or String object they relate to
+Attributes are stored as a part of the Hash or String object they relate to
 
+```ruby
 # author behaves like a String here, but also responds to .attributes
 primary_authors = parser.for_tag(:author).select { |author| author.attributes['type'] == 'primary' }
-puts "Primary authors: #{primary_authors.join(", ")}"
 
 # item behaves like a Hash, but also responds to .attributes
 favorite_items = parser.for_tag(:item).select { |item| item.attributes['favorite'] }
-puts "First favorite title: #{favorite_items[0]['title']}"
 ```
 
 Compatibility
