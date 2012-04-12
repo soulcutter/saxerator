@@ -40,13 +40,10 @@ primary_authors = parser.for_tag(:author).select { |author| author.attributes['t
 favorite_items = parser.for_tag(:item).select { |item| item.attributes['favorite'] }
 ```
 
-Compatibility
--------------
-Known compatible rubies:
-
-* MRI 1.9.3-p125
-* MRI 1.9.2-p318
-* JRuby 1.6.7 (with JRUBY_OPTS=--1.9)
+Known Issues
+------------
+* JRuby closes the file stream at the end of parsing, therefor to perform multiple operations
+  which parse a file you will need to instantiate a new parser with a new File object.
 
 FAQ
 ---
