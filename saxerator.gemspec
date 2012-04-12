@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
 require 'saxerator/version'
-require 'rake' # for FileList
 
 Gem::Specification.new do |s|
   s.name        = 'saxerator'
@@ -20,20 +19,20 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'saxerator'
 
-  s.files = FileList[
+  s.files = [
     'LICENSE',
     'README.md',
     'saxerator.gemspec',
-    'lib/**/*.rb',
-    'spec/**/*.*',
-    'benchmark/**/*.rb',
     'Gemfile',
     'Rakefile',
     '.rvmrc',
     '.gitignore',
     '.travis.yml'
-  ]
-  s.test_files    = FileList['spec/**/*.*']
+  ] +
+    Dir.glob('lib/**/*.rb') +
+    Dir.glob('spec/**/*.*') +
+    Dir.glob('benchmark/**/*.rb')
+  s.test_files    = Dir.glob('spec/**/*.*')
   s.executables   = []
   s.require_paths = ['lib']
 
