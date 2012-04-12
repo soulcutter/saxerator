@@ -42,7 +42,7 @@ module Saxerator
             last = stack.pop
             stack.last.add_node last
           elsif stack.size == 1
-            @block.yield(stack.pop.to_hash)
+            @block.call(stack.pop.to_hash)
           end
         end
 
