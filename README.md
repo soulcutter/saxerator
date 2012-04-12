@@ -1,4 +1,4 @@
-Saxerator
+Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png?branch=master)](http://travis-ci.org/soulcutter/saxerator)
 =========
 
 Saxerator is a SAX-based xml-to-hash parser designed for parsing very large files into manageable chunks. Rather than
