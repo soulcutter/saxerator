@@ -69,3 +69,6 @@ Why not DOM parsing?
 ### Acknowledgements ###
 Saxerator was inspired by [Nori](https://github.com/rubiii/nori) and [Gregory Brown](http://majesticseacreature.com/)'s
 [Practicing Ruby](http://practicingruby.com/)
+
+#### Legal Stuff ####
+Copyright © Bradley Schaefer. MIT License (see LICENSE file).
