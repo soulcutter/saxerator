@@ -6,7 +6,7 @@ module Saxerator
         @actual_depth = 0
       end
 
-      def start_element(_, _)
+      def start_element(_, __)
         @actual_depth += 1
         if @actual_depth == @depth
           open
