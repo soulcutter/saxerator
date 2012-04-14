@@ -20,6 +20,10 @@ describe Saxerator do
         results.should == ['one', 'two', 'three']
       end
 
+      it "should allow you to parse an entire document" do
+        subject.all.should == {'blurb' => ['one', 'two', 'three']}
+      end
+
       context "and one non-blurb" do
         let(:xml) { "<blurbs><blurb>one</blurb><blurb>two</blurb><blurb>three</blurb><notablurb>four</notablurb></blurbs>" }
         it "should only parse the requested tag" do

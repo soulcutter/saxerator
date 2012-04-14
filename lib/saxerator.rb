@@ -1,7 +1,9 @@
 require 'nokogiri'
 
-require "saxerator/version"
-require 'saxerator/document'
+require 'saxerator/version'
+require 'saxerator/dsl'
+require 'saxerator/full_document'
+require 'saxerator/document_fragment'
 require 'saxerator/string_with_attributes'
 require 'saxerator/hash_with_attributes'
 require 'saxerator/xml_node'
@@ -17,6 +19,6 @@ module Saxerator
   extend self
 
   def parser(xml)
-    Saxerator::Document.new(xml)
+    Saxerator::FullDocument.new(xml)
   end
 end
