@@ -35,7 +35,7 @@ describe Saxerator do
     context "with a string with an element at multiple depths" do
       let(:xml) do
         <<-eos
-          <books>
+          <publications>
             <book>
               <name>How to eat an airplane</name>
               <author>
@@ -49,7 +49,13 @@ describe Saxerator do
                 <name>Jeanne Clarewood</name>
               </author>
             </book>
-          </books>
+            <article>
+              <name>Is our children learning?</name>
+              <author>
+                <name>Hazel Nutt</name>
+              </author>
+            </article>
+          </publication>
         eos
       end
 
@@ -57,15 +63,28 @@ describe Saxerator do
         results = []
         subject.at_depth(3).each { |x| results << x }
         results.should == [
-          'How to eat an airplane', {'name' => ['Leviticus Alabaster', 'Eunice Diesel']},
-          'To wallop a horse in the face', {'name' => 'Jeanne Clarewood'}
+          'How to eat an airplane', { 'name' => ['Leviticus Alabaster', 'Eunice Diesel'] },
+          'To wallop a horse in the face', { 'name' => 'Jeanne Clarewood' },
+          'Is our children learning?', { 'name' => 'Hazel Nutt' }
         ]
       end
 
       it "should only parse the requested tag depth and tag" do
         results = []
         subject.at_depth(3).for_tag(:name).each { |x| results << x }
-        results.should == ['How to eat an airplane', 'To wallop a horse in the face']
+        results.should == ['How to eat an airplane', 'To wallop a horse in the face', 'Is our children learning?']
+      end
+
+      it "should only parse tags nested inside the specified tag" do
+        results = []
+        subject.within(:article).each { |x| results << x }
+        results.should == ['Is our children learning?', { 'name' => 'Hazel Nutt' }]
+      end
+
+      it "should only parse specified tags nested inside a specified tag" do
+        results = []
+        subject.for_tag(:name).within(:article).each { |x| results << x }
+        results.should == ['Is our children learning?', 'Hazel Nutt'  ]
       end
     end
 
