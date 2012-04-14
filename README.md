@@ -33,11 +33,15 @@ puts "First title: #{parser.for_tag(:title).first}"
 Attributes are stored as a part of the Hash or String object they relate to
 
 ```ruby
-# author behaves like a String here, but also responds to .attributes
+# author is a String here, but also responds to .attributes
 primary_authors = parser.for_tag(:author).select { |author| author.attributes['type'] == 'primary' }
+```
 
-# item behaves like a Hash, but also responds to .attributes
-favorite_items = parser.for_tag(:item).select { |item| item.attributes['favorite'] }
+You can combine predicates to isolate just the tags you want.
+
+```ruby
+parser.for_tag(:name).each { |x| all_the_names_in_a_document << x }
+parser.for_tag(:name).at_depth(2).each { |x| names_nested_under_document_root << x }
 ```
 
 Known Issues
