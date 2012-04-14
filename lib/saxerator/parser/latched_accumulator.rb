@@ -1,7 +1,7 @@
 module Saxerator
   module Parser
     class LatchedAccumulator < ::Nokogiri::XML::SAX::Document
-      def initialize(config, latches = [], block)
+      def initialize(config, latches, block)
         @latches = latches
         block_and_reset = Proc.new do |x|
           block.call(x)
