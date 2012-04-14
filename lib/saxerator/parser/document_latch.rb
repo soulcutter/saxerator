@@ -1,10 +1,6 @@
 module Saxerator
   module Parser
     class DocumentLatch < ::Nokogiri::XML::SAX::Document
-      def initialize
-        @open = false
-      end
-
       def open
         @open = true
       end
