@@ -32,6 +32,43 @@ describe Saxerator do
       end
     end
 
+    context "with a string with an element at multiple depths" do
+      let(:xml) do
+        <<-eos
+          <books>
+            <book>
+              <name>How to eat an airplane</name>
+              <author>
+                <name>Leviticus Alabaster</name>
+                <name>Eunice Diesel</name>
+              </author>
+            </book>
+            <book>
+              <name>To wallop a horse in the face</name>
+              <author>
+                <name>Jeanne Clarewood</name>
+              </author>
+            </book>
+          </books>
+        eos
+      end
+
+      it "should only parse the requested tag depth" do
+        results = []
+        subject.at_depth(3).each { |x| results << x }
+        results.should == [
+          'How to eat an airplane', {'name' => ['Leviticus Alabaster', 'Eunice Diesel']},
+          'To wallop a horse in the face', {'name' => 'Jeanne Clarewood'}
+        ]
+      end
+
+      it "should only parse the requested tag depth and tag" do
+        results = []
+        subject.at_depth(3).for_tag(:name).each { |x| results << x }
+        results.should == ['How to eat an airplane', 'To wallop a horse in the face']
+      end
+    end
+
     context "with a file with blurbs" do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 
@@ -47,7 +84,6 @@ describe Saxerator do
         subject.for_tag(:blurb).first.should == 'one'
         subject.for_tag(:blurb).first.should == 'one'
       end
-
     end
 
     context "with a file with nested elements" do

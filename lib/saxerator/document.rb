@@ -12,6 +12,10 @@ module Saxerator
       Document.new(@source, @config, @latches + [Parser::ElementNameLatch.new(tag.to_s)])
     end
 
+    def at_depth(depth)
+      Document.new(@source, @config, @latches + [Parser::DepthLatch.new(depth.to_i)])
+    end
+
     def each(&block)
       document = Parser::LatchedAccumulator.new(@config, @latches, block)
       parser = ::Nokogiri::XML::SAX::Parser.new document
