@@ -1,23 +1,23 @@
 module Saxerator
   class XmlNode
-    attr_accessor :name, :attributes, :children, :type
+    attr_reader :name
 
     def initialize(config, name, attributes)
       @config = config
-      self.name = name
-      self.attributes = attributes
-      self.children = []
+      @name = name
+      @attributes = attributes
+      @children = []
       @text = false
     end
 
     def add_node(node)
       @text = true if node.is_a? String
-      children << node
+      @children << node
     end
 
     def to_s
-      string = StringWithAttributes.new(@text ? children.join : children.to_s)
-      string.attributes = attributes
+      string = StringWithAttributes.new(@children.join)
+      string.attributes = @attributes
       string
     end
 
@@ -26,7 +26,7 @@ module Saxerator
         to_s
       else
         out = HashWithAttributes.new
-        out.attributes = attributes
+        out.attributes = @attributes
 
         @children.each do |child|
           name = child.name
