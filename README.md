@@ -42,6 +42,7 @@ You can combine predicates to isolate just the tags you want.
 ```ruby
 parser.for_tag(:name).each { |x| all_the_names_in_a_document << x }
 parser.for_tag(:name).at_depth(2).each { |x| names_nested_under_document_root << x }
+parser.for_tag(:name).within(:author).each { |x| author_names << x }
 ```
 
 Known Issues
