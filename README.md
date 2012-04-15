@@ -45,6 +45,12 @@ parser.for_tag(:name).at_depth(2).each { |x| names_nested_under_document_root <<
 parser.for_tag(:name).within(:author).each { |x| author_names << x }
 ```
 
+Don't care about memory/streaming, you just want your xml in one big hash? Saxerator can do that too.
+
+```ruby
+parser.all # big, giant hash
+```
+
 Known Issues
 ------------
 * JRuby closes the file stream at the end of parsing, therefor to perform multiple operations
