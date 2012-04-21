@@ -16,7 +16,7 @@ module Saxerator
       parser = ::Nokogiri::XML::SAX::Parser.new(reader)
 
       # Always have to start at the beginning of a File
-      @source.rewind if(@source.is_a?(File))
+      @source.rewind if @source.respond_to?(:rewind)
 
       parser.parse(@source)
     end

@@ -31,6 +31,7 @@ module Saxerator
         @children.each do |child|
           name = child.name
           element = child.to_hash
+
           if out[name]
             if !out[name].is_a?(Array)
               out[name] = [out[name]]
@@ -40,6 +41,7 @@ module Saxerator
             out[name] = element
           end
         end
+
         out
       end
     end
