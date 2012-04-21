@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
     'saxerator.gemspec',
     'Gemfile',
     'Rakefile',
-    '.rvmrc',
     '.gitignore',
     '.travis.yml'
   ] +
