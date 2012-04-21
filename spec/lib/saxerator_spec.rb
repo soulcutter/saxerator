@@ -12,7 +12,15 @@ describe Saxerator do
     let(:parser) { Saxerator.parser(xml) }
 
     context "with a string with blurbs" do
-      let(:xml) { "<blurbs><blurb>one</blurb><blurb>two</blurb><blurb>three</blurb></blurbs>" }
+      let(:xml) do
+        <<-eos
+          <blurbs>
+            <blurb>one</blurb>
+            <blurb>two</blurb>
+            <blurb>three</blurb>
+          </blurbs>
+        eos
+      end
 
       it "should parse simple strings" do
         results = []
@@ -23,18 +31,29 @@ describe Saxerator do
       it "should allow you to parse an entire document" do
         subject.all.should == {'blurb' => ['one', 'two', 'three']}
       end
+    end
 
-      context "and one non-blurb" do
-        let(:xml) { "<blurbs><blurb>one</blurb><blurb>two</blurb><blurb>three</blurb><notablurb>four</notablurb></blurbs>" }
-        it "should only parse the requested tag" do
-          results = []
-          subject.for_tag(:blurb).each { |x| results << x }
-          results.should == ['one', 'two', 'three']
-          subject.for_tag(:notablurb).each { |x| results << x }
-          results.should == ['one', 'two', 'three', 'four']
-        end
+    context "a string with blurbs and one non-blurb" do
+      let(:xml) do
+        <<-eos
+          <blurbs>
+            <blurb>one</blurb>
+            <blurb>two</blurb>
+            <blurb>three</blurb>
+            <notablurb>four</notablurb>
+          </blurbs>
+        eos
+      end
+
+      it "should only parse the requested tag" do
+        results = []
+        subject.for_tag(:blurb).each { |x| results << x }
+        results.should == ['one', 'two', 'three']
+        subject.for_tag(:notablurb).each { |x| results << x }
+        results.should == ['one', 'two', 'three', 'four']
       end
     end
+
 
     context "with a string with an element at multiple depths" do
       let(:xml) do
