@@ -11,29 +11,7 @@ describe Saxerator do
     subject { parser }
     let(:parser) { Saxerator.parser(xml) }
 
-    context "with a string with blurbs" do
-      let(:xml) do
-        <<-eos
-          <blurbs>
-            <blurb>one</blurb>
-            <blurb>two</blurb>
-            <blurb>three</blurb>
-          </blurbs>
-        eos
-      end
-
-      it "should parse simple strings" do
-        results = []
-        subject.for_tag(:blurb).each { |x| results << x }
-        results.should == ['one', 'two', 'three']
-      end
-
-      it "should allow you to parse an entire document" do
-        subject.all.should == {'blurb' => ['one', 'two', 'three']}
-      end
-    end
-
-    context "a string with blurbs and one non-blurb" do
+    context "with a string with blurbs and one non-blurb" do
       let(:xml) do
         <<-eos
           <blurbs>
@@ -45,15 +23,18 @@ describe Saxerator do
         eos
       end
 
+      it "should parse simple strings" do
+        subject.for_tag(:blurb).inject([], :<<).should == ['one', 'two', 'three']
+      end
+
       it "should only parse the requested tag" do
-        results = []
-        subject.for_tag(:blurb).each { |x| results << x }
-        results.should == ['one', 'two', 'three']
-        subject.for_tag(:notablurb).each { |x| results << x }
-        results.should == ['one', 'two', 'three', 'four']
+        subject.for_tag(:notablurb).inject([], :<<).should == ['four']
+      end
+
+      it "should allow you to parse an entire document" do
+        subject.all.should == {'blurb' => ['one', 'two', 'three'], 'notablurb' => 'four'}
       end
     end
-
 
     context "with a string with an element at multiple depths" do
       let(:xml) do
@@ -83,9 +64,7 @@ describe Saxerator do
       end
 
       it "should only parse the requested tag depth" do
-        results = []
-        subject.at_depth(3).each { |x| results << x }
-        results.should == [
+        subject.at_depth(3).inject([], :<<).should == [
           'How to eat an airplane', { 'name' => ['Leviticus Alabaster', 'Eunice Diesel'] },
           'To wallop a horse in the face', { 'name' => 'Jeanne Clarewood' },
           'Is our children learning?', { 'name' => 'Hazel Nutt' }
@@ -93,21 +72,25 @@ describe Saxerator do
       end
 
       it "should only parse the requested tag depth and tag" do
-        results = []
-        subject.at_depth(3).for_tag(:name).each { |x| results << x }
-        results.should == ['How to eat an airplane', 'To wallop a horse in the face', 'Is our children learning?']
+        subject.at_depth(3).for_tag(:name).inject([], :<<).should == [
+            'How to eat an airplane',
+            'To wallop a horse in the face',
+            'Is our children learning?'
+        ]
       end
 
       it "should only parse tags nested inside the specified tag" do
-        results = []
-        subject.within(:article).each { |x| results << x }
-        results.should == ['Is our children learning?', { 'name' => 'Hazel Nutt' }]
+        subject.within(:article).inject([], :<<).should == [
+            'Is our children learning?',
+            { 'name' => 'Hazel Nutt' }
+        ]
       end
 
-      it "should only parse specified tags nested inside a specified tag" do
-        results = []
-        subject.for_tag(:name).within(:article).each { |x| results << x }
-        results.should == ['Is our children learning?', 'Hazel Nutt'  ]
+      it "should combine #for_tag and #within to parse the specified elements" do
+        subject.for_tag(:name).within(:article).inject([], :<<).should == [
+            'Is our children learning?',
+            'Hazel Nutt'
+        ]
       end
     end
 
@@ -115,9 +98,7 @@ describe Saxerator do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 
       it "should parse simple strings" do
-        results = []
-        subject.for_tag(:blurb).each { |x| results << x }
-        results.should == ['one', 'two', 'three']
+        subject.for_tag(:blurb).inject([], :<<).should == ['one', 'two', 'three']
       end
 
       it "should allow multiple operations on the same parser" do
