@@ -40,9 +40,26 @@ primary_authors = parser.for_tag(:author).select { |author| author.attributes['t
 You can combine predicates to isolate just the tags you want.
 
 ```ruby
-parser.for_tag(:name).each { |x| all_the_names_in_a_document << x }
-parser.for_tag(:name).at_depth(2).each { |x| names_nested_under_document_root << x }
-parser.for_tag(:name).within(:author).each { |x| author_names << x }
+require 'saxerator'
+
+parser = Saxerator.parser(bookshelf_xml)
+
+# You can chain predicates
+parser.for_tag(:name).within(:book).each { |book_name| puts book_name }
+
+# You can re-use intermediary predicates
+bookshelf_contents = parser.within(:bookshelf)
+
+books = bookshelf_contents.for_tag(:book)
+magazines = bookshelf_contents.for_tag(:magazine)
+
+books.each do |book|
+  # Some processing on a book
+end
+
+magazines.each do |magazine|
+  # Do some work with a magazine
+end
 ```
 
 Don't care about memory/streaming, you just want your xml in one big hash? Saxerator can do that too.
