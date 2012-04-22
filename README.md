@@ -92,7 +92,7 @@ Why not DOM parsing?
   > document is very large, this can be an important consideration.
 
 ### Acknowledgements ###
-Saxerator was inspired by [Nori](https://github.com/rubiii/nori) and [Gregory Brown](http://majesticseacreature.com/)'s
+Saxerator was inspired by - but not affiliated with - [nori](https://github.com/rubiii/nori) and [Gregory Brown](http://majesticseacreature.com/)'s
 [Practicing Ruby](http://practicingruby.com/)
 
 #### Legal Stuff ####
