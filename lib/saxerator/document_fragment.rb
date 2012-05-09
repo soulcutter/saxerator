@@ -1,4 +1,5 @@
 require 'saxerator/dsl'
+require 'nokogiri'
 
 module Saxerator
   class DocumentFragment
@@ -13,7 +14,7 @@ module Saxerator
 
     def each(&block)
       reader = Parser::LatchedAccumulator.new(@config, @latches, block)
-      parser = ::Nokogiri::XML::SAX::Parser.new(reader)
+      parser = Nokogiri::XML::SAX::Parser.new(reader)
 
       # Always have to start at the beginning of a File
       @source.rewind if @source.respond_to?(:rewind)

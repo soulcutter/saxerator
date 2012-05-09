@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 require 'saxerator/version'
 
 require 'saxerator/full_document'
