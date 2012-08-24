@@ -5,28 +5,22 @@ module Saxerator
     class WithinElementLatch < DocumentLatch
       def initialize(name)
         @name = name
-        @inner_depth = 0
+        @depth_within_element = 0
       end
 
       def start_element name, _
-        if @inner_depth == 0
-          if name == @name
-            @inner_depth += 1
-          end
-        else
-          open if @inner_depth == 1
-          @inner_depth += 1
+        if name == @name || @depth_within_element > 0
+          @depth_within_element += 1
+          open if @depth_within_element == 2
         end
       end
 
       def end_element _
-        if @inner_depth > 0
-          @inner_depth -= 1
-          close if @inner_depth == 0
+        if @depth_within_element > 0
+          @depth_within_element -= 1
+          close if @depth_within_element == 1
         end
       end
-
-      def reset; end
     end
   end
 end

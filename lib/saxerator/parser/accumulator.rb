@@ -27,6 +27,10 @@ module Saxerator
       end
 
       alias cdata_block characters
+
+      def accumulating?
+        @stack.size > 0
+      end
     end
   end
 end

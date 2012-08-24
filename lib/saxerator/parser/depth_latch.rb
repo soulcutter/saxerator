@@ -4,19 +4,20 @@ module Saxerator
   module Parser
     class DepthLatch < DocumentLatch
       def initialize(depth)
-        @depth = depth
-        @actual_depth = 0
+        @target_depth = depth
+        @current_depth = 0
       end
 
       def start_element(_, __)
-        @actual_depth += 1
-        if @actual_depth == @depth
-          open
-        end
+        @current_depth += 1
       end
 
       def end_element(_)
-        @actual_depth -= 1
+        @current_depth -= 1
+      end
+
+      def open?
+        @current_depth == @target_depth
       end
     end
   end

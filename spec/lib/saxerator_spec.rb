@@ -94,6 +94,39 @@ describe Saxerator do
       end
     end
 
+    context "with a grand child" do
+      let(:xml) do
+         <<-eos
+        <root>
+          <children>
+            <name>Rudy McMannis</name>
+            <children>
+              <name>Tom McMannis</name>
+            </children>
+            <grandchildren>
+              <name>Mildred Marston</name>
+            </grandchildren>
+            <name>Anne Welsh</name>
+          </children>
+        </root>
+        eos
+      end
+
+      it "should only parse children of the specified tag" do
+        subject.child_of(:grandchildren).inject([], :<<).should == [
+            'Mildred Marston'
+        ]
+      end
+
+      it "should combine #for_tag and #child_of" do
+        subject.for_tag(:name).child_of(:children).inject([], :<<).should == [
+            'Rudy McMannis',
+            'Tom McMannis',
+            'Anne Welsh'
+        ]
+      end
+    end
+
     context "with a file with blurbs" do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 

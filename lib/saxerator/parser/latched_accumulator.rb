@@ -5,23 +5,14 @@ module Saxerator
     class LatchedAccumulator < Nokogiri::XML::SAX::Document
       def initialize(config, latches, block)
         @latches = latches
-        block_and_reset = Proc.new do |x|
-          block.call(x)
-          reset_latches
-        end
-        @accumulator = Accumulator.new(config, block_and_reset)
-      end
-
-      def reset_latches
-        @latches.each { |latch| latch.reset }
+        @accumulator = Accumulator.new(config, block)
       end
 
       def check_latches_and_passthrough(method, *args)
         @latches.each { |latch| latch.send(method, *args) }
-        if @latches.all? { |latch| latch.open? }
+        if @accumulator.accumulating? ||
+            @latches.all? { |latch| latch.open? }
           @accumulator.send(method, *args)
-        else
-          reset_latches
         end
       end
 

@@ -11,6 +11,7 @@ require 'saxerator/parser/element_name_latch'
 require 'saxerator/parser/depth_latch'
 require 'saxerator/parser/within_element_latch'
 require 'saxerator/parser/latched_accumulator'
+require 'saxerator/parser/child_of_latch'
 
 module Saxerator
   extend self

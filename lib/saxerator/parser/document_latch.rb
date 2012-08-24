@@ -14,10 +14,6 @@ module Saxerator
       def open?
         @open
       end
-
-      def reset
-        close
-      end
     end
   end
 end

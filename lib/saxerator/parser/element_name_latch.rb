@@ -7,10 +7,12 @@ module Saxerator
         @name = name
       end
 
-      def start_element(name, _)
-        if name == @name
-          open
-        end
+      def start_element name, _
+        name == @name ? open : close
+      end
+
+      def end_element name
+        close if name == @name
       end
     end
   end

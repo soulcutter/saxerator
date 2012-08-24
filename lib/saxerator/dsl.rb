@@ -1,15 +1,24 @@
 module Saxerator
   module DSL
     def for_tag(tag)
-      DocumentFragment.new(@source, @config, @latches + [Parser::ElementNameLatch.new(tag.to_s)])
+      specify(Parser::ElementNameLatch.new(tag.to_s))
     end
 
     def at_depth(depth)
-      DocumentFragment.new(@source, @config, @latches + [Parser::DepthLatch.new(depth.to_i)])
+      specify(Parser::DepthLatch.new(depth.to_i))
     end
 
     def within(tag)
-      DocumentFragment.new(@source, @config, @latches + [Parser::WithinElementLatch.new(tag.to_s)])
+      specify(Parser::WithinElementLatch.new(tag.to_s))
+    end
+
+    def child_of(tag)
+      specify(Parser::ChildOfLatch.new(tag.to_s))
+    end
+
+    private
+    def specify(predicate)
+      DocumentFragment.new(@source, @config, @latches + [predicate])
     end
   end
 end
