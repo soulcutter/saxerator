@@ -21,12 +21,13 @@ The DSL consists of predicates that may be combined to describe which elements t
 Saxerator will only enumerate over chunks of xml that match all of the combined predicates (see Examples section
 for added clarity).
 
-* `for_tag(name)`: An element with the given `name`
-* `at_depth(n)`: An element that is `n` elements deep in the root element of an xml document. In other words, the root
-element itself would be `n = 0`
-* `within(name)`: Elements nested anywhere within an element with the given `name`
-* `child_of(name)`: Elements that are direct children of an element with the given `name`
-* `all`: Returns the entire document parsed into a hash. This is only available when no other predicates are specified
+| Predicate       | Explanation |
+|:----------------|:------------|
+| `all`           | Returns the entire document parsed into a hash. Cannot combine with other predicates
+| `for_tag(name)` | Elements whose name matches the given `name`
+| `at_depth(n)`   | Elements `n` levels deep inside the root of an xml document. The root element itself is `n = 0`
+| `within(name)`  | Elements nested anywhere within an element with the given `name`
+| `child_of(name)`| Elements that are direct children of an element with the given `name`
 
 
 Examples
