@@ -43,8 +43,8 @@ describe Saxerator do
             <book>
               <name>How to eat an airplane</name>
               <author>
-                <name>Leviticus Alabaster</name>
-                <name>Eunice Diesel</name>
+                <name type="primary">Leviticus Alabaster</name>
+                <name type="foreword">Eunice Diesel</name>
               </author>
             </book>
             <book>
@@ -91,6 +91,17 @@ describe Saxerator do
             'Is our children learning?',
             'Hazel Nutt'
         ]
+      end
+
+      it "should match tags with the specified attributes" do
+        subject.with_attribute(:type).inject([], :<<).should == [
+            'Leviticus Alabaster',
+            'Eunice Diesel'
+        ]
+      end
+
+      it "should match tags with the specified attributes" do
+        subject.with_attribute(:type, :primary).inject([], :<<).should == ['Leviticus Alabaster']
       end
     end
 
