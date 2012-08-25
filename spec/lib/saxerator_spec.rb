@@ -64,7 +64,7 @@ describe Saxerator do
       end
 
       it "should only parse the requested tag depth" do
-        subject.at_depth(3).inject([], :<<).should == [
+        subject.at_depth(2).inject([], :<<).should == [
           'How to eat an airplane', { 'name' => ['Leviticus Alabaster', 'Eunice Diesel'] },
           'To wallop a horse in the face', { 'name' => 'Jeanne Clarewood' },
           'Is our children learning?', { 'name' => 'Hazel Nutt' }
@@ -72,7 +72,7 @@ describe Saxerator do
       end
 
       it "should only parse the requested tag depth and tag" do
-        subject.at_depth(3).for_tag(:name).inject([], :<<).should == [
+        subject.at_depth(2).for_tag(:name).inject([], :<<).should == [
             'How to eat an airplane',
             'To wallop a horse in the face',
             'Is our children learning?'

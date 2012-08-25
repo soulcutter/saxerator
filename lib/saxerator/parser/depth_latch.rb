@@ -5,7 +5,7 @@ module Saxerator
     class DepthLatch < DocumentLatch
       def initialize(depth)
         @target_depth = depth
-        @current_depth = 0
+        @current_depth = -1
       end
 
       def start_element(_, __)

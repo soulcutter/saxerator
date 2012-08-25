@@ -8,15 +8,29 @@ independently.
 
 Each xml chunk is parsed into a JSON-like Ruby Hash structure for consumption.
 
-Examples
---------
 You can parse any valid xml in 3 simple steps.
 
 1. Initialize the parser
-1. Tell it which tag you care about
-1. Perform your work in an 'each' block, or using any [Enumerable](http://apidock.com/ruby/Enumerable)
+1. Specify which tag you care about using a simple DSL
+1. Perform your work in an `each` block, or using any [Enumerable](http://apidock.com/ruby/Enumerable)
 method
 
+The DSL
+-------
+The DSL consists of predicates that may be combined to describe which elements the parser should enumerate over.
+Saxerator will only enumerate over chunks of xml that match all of the combined predicates (see Examples section
+for added clarity).
+
+* `for_tag(name)`: An element with the given `name`
+* `at_depth(n)`: An element that is `n` elements deep in the root element of an xml document. In other words, the root
+element itself would be `n = 0`
+* `within(name)`: Elements nested anywhere within an element with the given `name`
+* `child_of(name)`: Elements that are direct children of an element with the given `name`
+* `all`: Returns the entire document parsed into a hash. This is only available when no other predicates are specified
+
+
+Examples
+--------
 ```ruby
 parser = Saxerator.parser(File.new("rss.xml"))
 
