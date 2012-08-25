@@ -142,17 +142,18 @@ describe Saxerator do
       end
     end
 
+    # Verifying the basic parsing behaviors (strings, hashes, arrays, attributes, character entity decoding)
     context "with a file with nested elements" do
       let(:xml) { fixture_file('nested_elements.xml') }
       subject { parser.for_tag(:entry).first }
 
       specify { subject['title'].should == 'How to eat an airplane' }
       specify { subject['author'].should == {'name' => 'Soulcutter'} }
+
       specify { subject['contributor'].should == [{'name' => 'Jane Doe'}, {'name' => 'Leviticus Alabaster'}] }
-      specify { subject['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
-      specify { subject['content'].attributes['type'].should == 'html' }
       specify { subject['contributor'][0].attributes['type'].should == 'primary' }
-      specify { subject['contributor'][0]['name'].should == 'Jane Doe' }
+
+      specify { subject['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
     end
   end
 end
