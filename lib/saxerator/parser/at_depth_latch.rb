@@ -2,7 +2,7 @@ require 'saxerator/parser/document_latch'
 
 module Saxerator
   module Parser
-    class DepthLatch < DocumentLatch
+    class AtDepthLatch < DocumentLatch
       def initialize(depth)
         @target_depth = depth
         @current_depth = -1

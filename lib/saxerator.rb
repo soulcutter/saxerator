@@ -7,9 +7,9 @@ require 'saxerator/hash_with_attributes'
 require 'saxerator/xml_node'
 
 require 'saxerator/parser/accumulator'
-require 'saxerator/parser/element_name_latch'
-require 'saxerator/parser/depth_latch'
-require 'saxerator/parser/within_element_latch'
+require 'saxerator/parser/for_tag_latch'
+require 'saxerator/parser/at_depth_latch'
+require 'saxerator/parser/within_latch'
 require 'saxerator/parser/latched_accumulator'
 require 'saxerator/parser/child_of_latch'
 

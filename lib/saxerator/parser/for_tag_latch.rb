@@ -2,7 +2,7 @@ require 'saxerator/parser/document_latch'
 
 module Saxerator
   module Parser
-    class ElementNameLatch < DocumentLatch
+    class ForTagLatch < DocumentLatch
       def initialize(name)
         @name = name
       end

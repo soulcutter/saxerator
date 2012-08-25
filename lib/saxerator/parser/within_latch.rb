@@ -2,7 +2,7 @@ require 'saxerator/parser/document_latch'
 
 module Saxerator
   module Parser
-    class WithinElementLatch < DocumentLatch
+    class WithinLatch < DocumentLatch
       def initialize(name)
         @name = name
         @depth_within_element = 0
