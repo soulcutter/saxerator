@@ -18,7 +18,7 @@ module Saxerator
           last = @stack.pop
           @stack.last.add_node last
         else
-          @block.call(@stack.pop.to_hash)
+          @block.call(@stack.pop.block_variable)
         end
       end
 

@@ -22,28 +22,29 @@ module Saxerator
     end
 
     def to_hash
-      if @text
-        to_s
-      else
-        out = HashWithAttributes.new
-        out.attributes = @attributes
+      hash = HashWithAttributes.new
+      hash.attributes = @attributes
 
-        @children.each do |child|
-          name = child.name
-          element = child.to_hash
+      @children.each do |child|
+        name = child.name
+        element = child.block_variable
 
-          if out[name]
-            if !out[name].is_a?(Array)
-              out[name] = [out[name]]
-            end
-            out[name] << element
-          else
-            out[name] = element
+        if hash[name]
+          if !hash[name].is_a?(Array)
+            hash[name] = [hash[name]]
           end
+          hash[name] << element
+        else
+          hash[name] = element
         end
-
-        out
       end
+
+      hash
     end
+
+    def block_variable
+      @text ? to_s : to_hash
+    end
+
   end
 end
