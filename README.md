@@ -28,7 +28,7 @@ for added clarity).
 | `at_depth(n)`   | Elements `n` levels deep inside the root of an xml document. The root element itself is `n = 0`
 | `within(name)`  | Elements nested anywhere within an element with the given `name`
 | `child_of(name)`| Elements that are direct children of an element with the given `name`
-| `with_attribute(name, value)` | Elements with a given `name` and `value`. If no `value` is given, matches any element with the specified attribute name present
+| `with_attribute(name, value)` | Elements that have an attribute with a given `name` and `value`. If no `value` is given, matches any element with the specified attribute name present
 
 
 Examples
@@ -70,18 +70,12 @@ books = bookshelf_contents.for_tag(:book)
 magazines = bookshelf_contents.for_tag(:magazine)
 
 books.each do |book|
-  # Some processing on a book
+  # ...
 end
 
 magazines.each do |magazine|
-  # Do some work with a magazine
+  # ...
 end
-```
-
-Don't care about memory/streaming, you just want your xml in one big hash? Saxerator can do that too.
-
-```ruby
-parser.all # big, giant hash
 ```
 
 Known Issues
