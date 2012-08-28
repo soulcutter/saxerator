@@ -2,7 +2,7 @@ require 'saxerator/parser/document_latch'
 
 module Saxerator
   module Parser
-    class ChildOfLatch < DocumentLatch
+    class ChildOfLatch < Nokogiri::XML::SAX::Document
       def initialize(name)
         @name = name
         @depths = []
