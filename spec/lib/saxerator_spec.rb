@@ -48,8 +48,8 @@ describe Saxerator do
     # string
     specify { entry['title'].should == 'How to eat an airplane' }
 
-    # hash
-    specify { entry['author'].should == {'name' => 'Soulcutter'} }
+    # hash and cdata inside name
+    specify { entry['author'].should == {'name' => 'Soul<utter'} }
 
     # array of hashes
     specify { entry['contributor'].should == [{'name' => 'Jane Doe'}, {'name' => 'Leviticus Alabaster'}] }

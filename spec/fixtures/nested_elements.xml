@@ -14,7 +14,7 @@
     <content type="html">&lt;p&gt;Airplanes are very large &#8212; this can present difficulty in digestion.&lt;/p&gt;</content>
     <media:thumbnail url="http://www.gravatar.com/avatar/a9eb6ba22e482b71b266daadf9c9a080?s=80"/>
     <author>
-      <name>Soulcutter</name>
+      <name><![CDATA[Soul<utter]]></name>
     </author>
     <contributor type="primary">
       <name>Jane Doe</name>
