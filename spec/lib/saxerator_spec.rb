@@ -60,6 +60,12 @@ describe Saxerator do
     # attributes on a string
     specify { entry['content'].attributes['type'].should == 'html' }
 
+    # name on a hash
+    specify { entry.name.should == 'entry' }
+
+    # name on a string
+    specify { entry['title'].name.should == 'title' }
+
     # character entity decoding
     specify { entry['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
 
