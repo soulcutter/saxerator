@@ -2,8 +2,8 @@ require 'saxerator/version'
 
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
-require 'saxerator/string_with_attributes'
-require 'saxerator/hash_with_attributes'
+require 'saxerator/string_element'
+require 'saxerator/hash_element'
 require 'saxerator/xml_node'
 
 require 'saxerator/parser/accumulator'

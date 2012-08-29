@@ -16,14 +16,11 @@ module Saxerator
     end
 
     def to_s
-      string = StringWithAttributes.new(@children.join)
-      string.attributes = @attributes
-      string.name = @name
-      string
+      StringElement.new(@children.join, @name, @attributes)
     end
 
     def to_hash
-      hash = HashWithAttributes.new
+      hash = HashElement.new(@name, @attributes)
 
       @children.each do |child|
         name = child.name
@@ -43,10 +40,7 @@ module Saxerator
     end
 
     def block_variable
-      variable = @text ? to_s : to_hash
-      variable.attributes = @attributes
-      variable.name = @name
-      variable
+      @text ? to_s : to_hash
     end
   end
 end
