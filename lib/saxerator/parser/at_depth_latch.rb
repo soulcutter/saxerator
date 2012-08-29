@@ -1,5 +1,3 @@
-require 'saxerator/parser/document_latch'
-
 module Saxerator
   module Parser
     class AtDepthLatch < Nokogiri::XML::SAX::Document
