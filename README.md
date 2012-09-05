@@ -1,10 +1,8 @@
 Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png?branch=master)](http://travis-ci.org/soulcutter/saxerator)
 =========
 
-Saxerator is a SAX-based xml-to-hash parser designed for parsing very large files into manageable chunks. Rather than
-dealing directly with SAX callback methods, Saxerator gives you Enumerable access to chunks of an xml document.
-This approach is ideal for large xml files containing a collection of elements that you can process
-independently.
+Saxerator is a streaming xml-to-hash parser designed for working with very large xml files by
+giving you Enumerable access to manageable chunks of the document.
 
 Each xml chunk is parsed into a JSON-like Ruby Hash structure for consumption.
 
