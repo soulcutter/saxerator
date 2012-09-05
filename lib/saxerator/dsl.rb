@@ -1,7 +1,12 @@
 module Saxerator
   module DSL
     def for_tag(tag)
-      specify Parser::ForTagLatch.new(tag.to_s)
+      for_tags([tag])
+    end
+
+    def for_tags(tags)
+      raise ArgumentError('#for_tags requires an Array argument') unless tags.is_a? Array
+      specify Parser::ForTagsLatch.new(tags.map(&:to_s))
     end
 
     def at_depth(depth)
