@@ -2,15 +2,14 @@ require 'saxerator/parser/document_latch'
 
 module Saxerator
   module Parser
-    class WithAttributeLatch < DocumentLatch
-      def initialize(name, value)
-        @attr_name = name
-        @attr_value = value
+    class WithAttributesLatch < DocumentLatch
+      def initialize(attrs)
+        @attrs = attrs
       end
 
       def start_element _, attributes
         attributes = Hash[attributes]
-        if attributes[@attr_name] && (@attr_value.nil? || attributes[@attr_name] == @attr_value)
+        if @attrs.all? { |k, v| attributes[k] && (v.nil? || attributes[k] == v) }
           open
         else
           close

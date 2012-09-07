@@ -28,7 +28,7 @@ for added clarity).
 | `within(name)`   | Elements nested anywhere within an element with the given `name`
 | `child_of(name)` | Elements that are direct children of an element with the given `name`
 | `with_attribute(name, value)` | Elements that have an attribute with a given `name` and `value`. If no `value` is given, matches any element with the specified attribute name present
-
+| `with_attributes(attrs)` | Similar to `with_attribute` except takes an Array or Hash indicating the attributes to match
 
 Examples
 --------
