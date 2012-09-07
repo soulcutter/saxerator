@@ -16,4 +16,8 @@ describe "Saxerator::DSL#for_tags" do
   it "should only select the specified tags" do
     parser.for_tags(%w(blurb1 blurb3)).inject([], :<<).should == ['one', 'three']
   end
+
+  it "raises an ArgumentError for a non-Array argument" do
+    lambda { parser.for_tags("asdf") }.should raise_error ArgumentError
+  end
 end

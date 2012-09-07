@@ -17,18 +17,16 @@ describe "Saxerator::DSL#with_attributes" do
   end
 
   it "matches tags with the exact specified attributes" do
-    subject.with_attributes(
-        {:type => :primary, :ridiculous => :true}
-    ).inject([], :<<).should == [
+    parser.with_attributes(:type => :primary, :ridiculous => 'true').inject([], :<<).should == [
         'Leviticus Alabaster'
     ]
   end
 
   it "matches tags which have the specified attributes" do
-    subject.with_attributes(%w(type ridiculous)).inject([], :<<).should == ['Leviticus Alabaster', 'Eunice Diesel']
+    parser.with_attributes(%w(type ridiculous)).inject([], :<<).should == ['Leviticus Alabaster', 'Eunice Diesel']
   end
 
   it "raises ArgumentError if you pass something other than a Hash or Array" do
-    lambda { subject.with_attributes('asdf') }.should raise_error ArgumentError
+    lambda { parser.with_attributes('asdf') }.should raise_error ArgumentError
   end
 end
