@@ -66,6 +66,9 @@ describe Saxerator do
     # name on a string
     specify { entry['title'].name.should == 'title' }
 
+    # name on an array
+    specify { entry['contributor'].name.should == 'contributor' }
+
     # character entity decoding
     specify { entry['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>"}
 

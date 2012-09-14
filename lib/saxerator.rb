@@ -4,6 +4,7 @@ require 'saxerator/full_document'
 require 'saxerator/document_fragment'
 require 'saxerator/string_element'
 require 'saxerator/hash_element'
+require 'saxerator/array_element'
 require 'saxerator/xml_node'
 
 require 'saxerator/parser/accumulator'

@@ -28,7 +28,8 @@ module Saxerator
 
         if hash[name]
           if !hash[name].is_a?(Array)
-            hash[name] = [hash[name]]
+            hash[name] = ArrayElement[hash[name]]
+            hash[name].name = name
           end
           hash[name] << element
         else
