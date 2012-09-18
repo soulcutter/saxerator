@@ -8,7 +8,7 @@ module Saxerator
       end
 
       def start_element(name, attrs = [])
-        @stack.push XmlNode.new(@config, name, Hash[*attrs.flatten])
+        @stack.push Builder::HashBuilder.new(@config, name, Hash[*attrs.flatten])
       end
 
       def end_element(_)

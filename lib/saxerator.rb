@@ -4,10 +4,11 @@ require 'nokogiri'
 
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
-require 'saxerator/string_element'
-require 'saxerator/hash_element'
-require 'saxerator/array_element'
-require 'saxerator/xml_node'
+
+require 'saxerator/builder/string_element'
+require 'saxerator/builder/hash_element'
+require 'saxerator/builder/array_element'
+require 'saxerator/builder/hash_builder'
 
 require 'saxerator/parser/hash_accumulator'
 require 'saxerator/parser/latched_accumulator'
