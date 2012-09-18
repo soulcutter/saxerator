@@ -1,5 +1,4 @@
 require 'saxerator/dsl'
-require 'nokogiri'
 
 module Saxerator
   class DocumentFragment

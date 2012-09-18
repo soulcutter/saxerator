@@ -1,5 +1,7 @@
 require 'saxerator/version'
 
+require 'nokogiri'
+
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
 require 'saxerator/string_element'

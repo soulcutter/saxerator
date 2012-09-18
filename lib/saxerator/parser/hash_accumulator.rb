@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 module Saxerator
   module Parser
     class Accumulator < Nokogiri::XML::SAX::Document

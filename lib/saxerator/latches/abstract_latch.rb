@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 module Saxerator
   module Latches
     class AbstractLatch < Nokogiri::XML::SAX::Document
