@@ -2,7 +2,7 @@ module Saxerator
   class FullDocument
     include DSL
 
-    def initialize(source, config = nil)
+    def initialize(source, config)
       @source = source
       @config = config
       @latches = []

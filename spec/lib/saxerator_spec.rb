@@ -41,7 +41,7 @@ describe Saxerator do
     end
   end
 
-  context "block_variable format" do
+  context "default (hash) format" do
     let(:xml) { fixture_file('nested_elements.xml') }
     subject(:entry) { Saxerator.parser(xml).for_tag(:entry).first }
 

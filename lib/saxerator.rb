@@ -5,13 +5,15 @@ require 'nokogiri'
 require 'saxerator/dsl'
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
+require 'saxerator/configuration'
 
+require 'saxerator/builder'
 require 'saxerator/builder/string_element'
 require 'saxerator/builder/hash_element'
 require 'saxerator/builder/array_element'
 require 'saxerator/builder/hash_builder'
 
-require 'saxerator/parser/hash_accumulator'
+require 'saxerator/parser/accumulator'
 require 'saxerator/parser/latched_accumulator'
 
 require 'saxerator/latches/for_tags'
@@ -24,6 +26,9 @@ module Saxerator
   extend self
 
   def parser(xml)
-    Saxerator::FullDocument.new(xml)
+    config = Configuration.new
+    yield(config) if block_given?
+
+    Saxerator::FullDocument.new(xml, config)
   end
 end
