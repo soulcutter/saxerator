@@ -1,8 +1,8 @@
-require 'saxerator/parser/document_latch'
+require 'saxerator/latches/abstract_latch'
 
 module Saxerator
-  module Parser
-    class ForTagsLatch < DocumentLatch
+  module Latches
+    class ForTags < AbstractLatch
       def initialize(names)
         @names = names
       end

@@ -6,23 +6,23 @@ module Saxerator
 
     def for_tags(tags)
       raise ArgumentError.new('#for_tags requires an Array argument') unless tags.is_a? Array
-      specify Parser::ForTagsLatch.new(tags.map(&:to_s))
+      specify Latches::ForTags.new(tags.map(&:to_s))
     end
 
     def at_depth(depth)
-      specify Parser::AtDepthLatch.new(depth.to_i)
+      specify Latches::AtDepth.new(depth.to_i)
     end
 
     def within(tag)
-      specify Parser::WithinLatch.new(tag.to_s)
+      specify Latches::Within.new(tag.to_s)
     end
 
     def child_of(tag)
-      specify Parser::ChildOfLatch.new(tag.to_s)
+      specify Latches::ChildOf.new(tag.to_s)
     end
 
     def with_attribute(name, value = nil)
-      specify Parser::WithAttributesLatch.new({name.to_s => !!value ? value.to_s : nil })
+      specify Latches::WithAttributes.new({name.to_s => !!value ? value.to_s : nil })
     end
 
     def with_attributes(attrs)
@@ -33,7 +33,7 @@ module Saxerator
       else
         raise ArgumentError.new("attributes should be a Hash or Array")
       end
-      specify Parser::WithAttributesLatch.new(attrs)
+      specify Latches::WithAttributes.new(attrs)
     end
 
     private

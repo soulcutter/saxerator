@@ -1,8 +1,8 @@
 require 'nokogiri'
 
 module Saxerator
-  module Parser
-    class DocumentLatch < Nokogiri::XML::SAX::Document
+  module Latches
+    class AbstractLatch < Nokogiri::XML::SAX::Document
       def open
         @open = true
       end

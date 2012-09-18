@@ -1,6 +1,6 @@
 module Saxerator
-  module Parser
-    class ChildOfLatch < Nokogiri::XML::SAX::Document
+  module Latches
+    class ChildOf < Nokogiri::XML::SAX::Document
       def initialize(name)
         @name = name
         @depths = []

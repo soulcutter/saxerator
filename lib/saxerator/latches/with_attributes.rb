@@ -1,8 +1,8 @@
-require 'saxerator/parser/document_latch'
+require 'saxerator/latches/abstract_latch'
 
 module Saxerator
-  module Parser
-    class WithAttributesLatch < DocumentLatch
+  module Latches
+    class WithAttributes < AbstractLatch
       def initialize(attrs)
         @attrs = attrs
       end

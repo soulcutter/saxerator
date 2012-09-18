@@ -1,6 +1,6 @@
 module Saxerator
-  module Parser
-    class AtDepthLatch < Nokogiri::XML::SAX::Document
+  module Latches
+    class AtDepth < Nokogiri::XML::SAX::Document
       def initialize(depth)
         @target_depth = depth
         @current_depth = -1

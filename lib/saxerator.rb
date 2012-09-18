@@ -7,13 +7,14 @@ require 'saxerator/hash_element'
 require 'saxerator/array_element'
 require 'saxerator/xml_node'
 
-require 'saxerator/parser/accumulator'
-require 'saxerator/parser/for_tags_latch'
-require 'saxerator/parser/at_depth_latch'
-require 'saxerator/parser/within_latch'
+require 'saxerator/parser/hash_accumulator'
 require 'saxerator/parser/latched_accumulator'
-require 'saxerator/parser/child_of_latch'
-require 'saxerator/parser/with_attributes_latch'
+
+require 'saxerator/latches/for_tags'
+require 'saxerator/latches/at_depth'
+require 'saxerator/latches/within'
+require 'saxerator/latches/child_of'
+require 'saxerator/latches/with_attributes'
 
 module Saxerator
   extend self
