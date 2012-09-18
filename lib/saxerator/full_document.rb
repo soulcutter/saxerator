@@ -1,5 +1,3 @@
-require 'saxerator/dsl'
-
 module Saxerator
   class FullDocument
     include DSL

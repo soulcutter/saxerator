@@ -1,5 +1,3 @@
-require 'saxerator/dsl'
-
 module Saxerator
   class DocumentFragment
     include Enumerable

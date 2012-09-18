@@ -2,6 +2,7 @@ require 'saxerator/version'
 
 require 'nokogiri'
 
+require 'saxerator/dsl'
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
 
