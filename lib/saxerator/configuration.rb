@@ -1,6 +1,6 @@
 module Saxerator
   class Configuration
-    attr_accessor :output_type
+    attr_reader :output_type
 
     def initialize
       @output_type = :hash
@@ -8,7 +8,7 @@ module Saxerator
 
     def output_type=(val)
       raise ArgumentError("Unknown output_type '#{val.inspect}'") unless Builder.valid?(val)
-      super
+      @output_type = val
     end
   end
 end

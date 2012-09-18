@@ -75,4 +75,21 @@ describe Saxerator do
     # empty element
     specify { entry['media:thumbnail'].should == {} }
   end
+
+  context "configuration" do
+    subject(:parser) do
+      Saxerator.parser(xml) do |config|
+        config.output_type = output_type
+      end
+    end
+
+    let(:output_type) { :hash }
+    let(:xml) do
+      <<-eos
+        <foo></foo>
+      eos
+    end
+
+    specify { parser.all.should == {} }
+  end
 end

@@ -5,10 +5,11 @@ module Saxerator
         @stack = []
         @config = config
         @block = block
+        @builder = Builder.to_class(@config.output_type)
       end
 
       def start_element(name, attrs = [])
-        @stack.push Builder.to_class(@config.output_type).new(@config, name, Hash[*attrs.flatten])
+        @stack.push @builder.new(@config, name, Hash[*attrs.flatten])
       end
 
       def end_element(_)
