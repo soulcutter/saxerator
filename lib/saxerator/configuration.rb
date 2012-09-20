@@ -7,7 +7,7 @@ module Saxerator
     end
 
     def output_type=(val)
-      raise ArgumentError("Unknown output_type '#{val.inspect}'") unless Builder.valid?(val)
+      raise ArgumentError.new("Unknown output_type '#{val.inspect}'") unless Builder.valid?(val)
       @output_type = val
     end
   end
