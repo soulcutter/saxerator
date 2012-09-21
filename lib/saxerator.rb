@@ -12,6 +12,7 @@ require 'saxerator/builder/string_element'
 require 'saxerator/builder/hash_element'
 require 'saxerator/builder/array_element'
 require 'saxerator/builder/hash_builder'
+require 'saxerator/builder/xml_builder'
 
 require 'saxerator/parser/accumulator'
 require 'saxerator/parser/latched_accumulator'
