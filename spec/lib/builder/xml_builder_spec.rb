@@ -17,7 +17,7 @@ describe "Saxerator xml format" do
   <id>1</id>
   <published>2012-01-01T16:17:00-06:00</published>
   <updated>2012-01-01T16:17:00-06:00</updated>
-  <link type="text/html" href="https://example.com/blog/how-to-eat-an-airplane" rel="alternate"/>
+  <link href="https://example.com/blog/how-to-eat-an-airplane"/>
   <title>How to eat an airplane</title>
   <content type="html">&lt;p&gt;Airplanes are very large &#x2014; this can present difficulty in digestion.&lt;/p&gt;</content>
   <media:thumbnail url="http://www.gravatar.com/avatar/a9eb6ba22e482b71b266daadf9c9a080?s=80"/>
