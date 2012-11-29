@@ -37,21 +37,32 @@ describe Saxerator do
     end
   end
 
-  context "output_type configuration" do
-    subject(:parser) do
-      Saxerator.parser(xml) { |config| config.output_type = output_type }
-    end
-
+  context "configuration" do
     let(:xml) { "<foo><bar>baz</bar></foo>" }
 
-    context "with config.output_type = :hash" do
-      let(:output_type) { :hash }
-      specify { parser.all.should == {'bar' => 'baz'} }
+    context "output type" do
+      subject(:parser) do
+        Saxerator.parser(xml) { |config| config.output_type = output_type }
+      end
+
+      context "with config.output_type = :hash" do
+        let(:output_type) { :hash }
+        specify { parser.all.should == {'bar' => 'baz'} }
+      end
+
+      context "with an invalid config.output_type" do
+        let(:output_type) { 'lmao' }
+        specify { expect { parser }.to raise_error(ArgumentError) }
+      end
     end
 
-    context "with an invalid config.output_type" do
-      let(:output_type) { 'lmao' }
-      specify { lambda { parser }.should raise_error(ArgumentError) }
+    context "symbolize keys" do
+      subject(:parser) do
+        Saxerator.parser(xml) { |config| config.symbolize_keys! }
+      end
+
+      specify { parser.all.should == { :bar => 'baz' } }
     end
+    
   end
 end

@@ -5,7 +5,7 @@ module Saxerator
 
       def initialize(config, name, attributes)
         @config = config
-        @name = name
+        @name = config.hash_key_generator.call(name)
         @attributes = attributes
         @children = []
         @text = false
