@@ -29,11 +29,13 @@ Gem::Specification.new do |s|
     Dir.glob('lib/**/*.rb') +
     Dir.glob('spec/**/*.*') +
     Dir.glob('benchmark/**/*.rb')
-  s.test_files    = Dir.glob('spec/**/*.*')
+  s.test_files    = Dir.glob('spec/**/*.*') + Dir.glob('features/**/*.*')
   s.executables   = []
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'nokogiri', '>= 1.4.0'
 
-  s.add_development_dependency 'rspec', '>= 2.11.0'
+  s.add_development_dependency 'rspec',    '>= 2.11.0'
+  s.add_development_dependency 'cucumber', '~> 1.2.1'
+  s.add_development_dependency 'aruba',    '~> 0.5.1'
 end
