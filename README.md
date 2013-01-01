@@ -2,14 +2,14 @@ Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png
 =========
 
 Saxerator is a streaming xml-to-hash parser designed for working with very large xml files by
-giving you Enumerable access to manageable chunks of the document.
+giving you [Enumerable](http://apidock.com/ruby/Enumerable) access to manageable chunks of the document.
 
 Each xml chunk is parsed into a JSON-like Ruby Hash structure for consumption.
 
 You can parse any valid xml in 3 simple steps.
 
 1. Initialize the parser
-1. Specify which tag you care about using a simple DSL
+1. Specify which tag(s) you care about using a simple DSL
 1. Perform your work in an `each` block, or using any [Enumerable](http://apidock.com/ruby/Enumerable)
 method
 
@@ -102,7 +102,7 @@ FAQ
 ---
 Why the name 'Saxerator'?
 
-  > It's a combination of SAX + Enumerator.
+  > It's a combination of [SAX](http://en.wikipedia.org/wiki/Simple_API_for_XML) + Enumerator.
 
 Why use Saxerator over regular SAX parsing?
 
