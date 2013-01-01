@@ -7,6 +7,10 @@ Feature: all
     Saxerator.parser(xml).all # => great big hash
     """
 
+    ```ruby
+    Saxerator.parser(xml).all # => great big hash
+    ```
+
   Scenario: all predicate
     Given a file named "example.xml" with:
       """xml
