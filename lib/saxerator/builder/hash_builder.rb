@@ -27,18 +27,31 @@ module Saxerator
           name = child.name
           element = child.block_variable
 
-          if hash[name]
-            if !hash[name].is_a?(Array)
-              hash[name] = ArrayElement[hash[name]]
-              hash[name].name = name
+          add_to_hash_element( hash, name, element)         
+        end
+
+        if @config.put_attributes_in_hash?
+          
+          @attributes.each do |attribute|
+            attribute.each_slice(2) do |name, element|
+              add_to_hash_element( hash, name, element)
             end
-            hash[name] << element
-          else
-            hash[name] = element
           end
         end
 
         hash
+      end
+      
+      def add_to_hash_element( hash, name, element)
+        if hash[name]
+          if !hash[name].is_a?(Array)
+            hash[name] = ArrayElement[hash[name]]
+            hash[name].name = name
+          end
+          hash[name] << element
+        else
+          hash[name] = element
+        end
       end
 
       def block_variable
