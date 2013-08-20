@@ -43,6 +43,7 @@ module Saxerator
       end
       
       def add_to_hash_element( hash, name, element)
+        name = @config.hash_key_generator.call(name)
         if hash[name]
           if !hash[name].is_a?(Array)
             hash[name] = ArrayElement[hash[name]]
