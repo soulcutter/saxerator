@@ -65,4 +65,35 @@ describe Saxerator do
     end
     
   end
+  
+  context "configuration with put_attributes_in_hash!" do
+    let(:xml) { '<foo foo="bar"><bar>baz</bar></foo>' }
+
+    subject(:parser) do
+      Saxerator.parser(xml) do |config| 
+        config.put_attributes_in_hash!
+      end
+    end
+                
+    it "should be able to parse it" do
+      parser.all.should == { 'bar' => 'baz', 'foo' => 'bar' }   
+    end 
+    
+  end    
+    
+  context "configuration with put_attributes_in_hash! and config.output_type = :xml" do
+    let(:xml) { '<foo foo="bar"><bar>baz</bar></foo>' }
+
+    subject(:parser) do
+      Saxerator.parser(xml) do |config| 
+        config.put_attributes_in_hash!
+        config.output_type = :xml
+      end
+    end
+
+    context "should raise error with " do
+      specify { expect { parser }.to raise_error(ArgumentError) }
+    end    
+  end
+  
 end
