@@ -80,11 +80,11 @@ end
 Configuration
 -------------
 
-Certain options are available at parser initialization.
+Certain options are available via a configuration block at parser initialization.
 
 ```ruby
-Saxerator.parse(xml) do |config|
-  # config object has accessors for various settings
+Saxerator.parser(xml) do |config|
+  config.output_type = :xml
 end
 ```
 
