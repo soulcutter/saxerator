@@ -6,3 +6,5 @@ pkg/*
 .idea/
 coverage/
 .rvmrc
+.ruby-version
+.ruby-gemset
