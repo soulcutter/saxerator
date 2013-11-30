@@ -30,8 +30,13 @@ module Saxerator
       @hash_key_generator = lambda { |x| hash_key_normalizer.call(x).to_sym }
     end
 
-    def strip_namespaces!
-      @hash_key_normalizer = lambda { |x| x.to_s.gsub(/\w+:/, '') }
+    def strip_namespaces!(*namespaces)
+      if namespaces.any?
+        matching_group = namespaces.join('|')
+        @hash_key_normalizer = lambda { |x| x.to_s.gsub(/(#{matching_group}):/, '') }
+      else
+        @hash_key_normalizer = lambda { |x| x.to_s.gsub(/\w+:/, '') }
+      end
     end
 
     def put_attributes_in_hash!

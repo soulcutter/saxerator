@@ -84,6 +84,23 @@ describe Saxerator do
 
         specify { parser.all.should == {:bar => 'baz'} }
       end
+
+      context "for specific namespaces" do
+        let(:xml) do
+          <<-XML.gsub /^ {10}/, ''
+          <ns1:foo>
+            <ns2:bar>baz</ns2:bar>
+            <ns3:bar>biz</ns3:bar>
+          </ns1:foo>
+          XML
+        end
+        subject(:parser) do
+          Saxerator.parser(xml) { |config| config.strip_namespaces! :ns1, :ns3 }
+        end
+
+        specify { parser.all.should == {'ns2:bar' => 'baz', 'bar' => 'biz'} }
+        specify { parser.all.name.should == 'foo' }
+      end
     end
 
   end
