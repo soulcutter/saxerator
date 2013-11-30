@@ -62,30 +62,52 @@ describe Saxerator do
       end
 
       specify { parser.all.should == { :bar => 'baz' } }
+      specify { parser.all.name.should == :foo }
     end
-    
+
+    context "with strip namespaces" do
+      let(:xml) { "<ns1:foo><ns3:bar>baz</ns3:bar></ns1:foo>" }
+      subject(:parser) do
+        Saxerator.parser(xml) { |config| config.strip_namespaces! }
+      end
+
+      specify { parser.all.should == {'bar' => 'baz'} }
+      specify { parser.all.name.should == 'foo' }
+
+      context "combined with symbolize keys" do
+        subject(:parser) do
+          Saxerator.parser(xml) do |config|
+            config.strip_namespaces!
+            config.symbolize_keys!
+          end
+        end
+
+        specify { parser.all.should == {:bar => 'baz'} }
+      end
+    end
+
   end
-  
+
   context "configuration with put_attributes_in_hash!" do
     let(:xml) { '<foo foo="bar"><bar>baz</bar></foo>' }
 
     subject(:parser) do
-      Saxerator.parser(xml) do |config| 
+      Saxerator.parser(xml) do |config|
         config.put_attributes_in_hash!
       end
     end
-                
+
     it "should be able to parse it" do
-      parser.all.should == { 'bar' => 'baz', 'foo' => 'bar' }   
-    end 
-    
-  end    
-    
+      parser.all.should == { 'bar' => 'baz', 'foo' => 'bar' }
+    end
+
+  end
+
   context "configuration with put_attributes_in_hash! and config.output_type = :xml" do
     let(:xml) { '<foo foo="bar"><bar>baz</bar></foo>' }
 
     subject(:parser) do
-      Saxerator.parser(xml) do |config| 
+      Saxerator.parser(xml) do |config|
         config.put_attributes_in_hash!
         config.output_type = :xml
       end
@@ -93,7 +115,7 @@ describe Saxerator do
 
     context "should raise error with " do
       specify { expect { parser }.to raise_error(ArgumentError) }
-    end    
+    end
   end
-  
+
 end
