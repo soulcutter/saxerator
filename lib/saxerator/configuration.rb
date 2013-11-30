@@ -14,26 +14,43 @@ module Saxerator
       raise_error_if_using_put_attributes_in_hash_with_xml
     end
 
+    def generate_key_for(val)
+      hash_key_generator.call val
+    end
+
+    def hash_key_normalizer
+      @hash_key_normalizer ||= lambda { |x| x.to_s }
+    end
+
     def hash_key_generator
-      @hash_key_generator ||= lambda { |x| x.to_s }
+      @hash_key_generator || hash_key_normalizer
     end
 
     def symbolize_keys!
-      @hash_key_generator = lambda { |x| x.to_sym }
+      @hash_key_generator = lambda { |x| hash_key_normalizer.call(x).to_sym }
     end
-    
+
+    def strip_namespaces!(*namespaces)
+      if namespaces.any?
+        matching_group = namespaces.join('|')
+        @hash_key_normalizer = lambda { |x| x.to_s.gsub(/(#{matching_group}):/, '') }
+      else
+        @hash_key_normalizer = lambda { |x| x.to_s.gsub(/\w+:/, '') }
+      end
+    end
+
     def put_attributes_in_hash!
       @put_attributes_in_hash = true
-      raise_error_if_using_put_attributes_in_hash_with_xml      
+      raise_error_if_using_put_attributes_in_hash_with_xml
     end
-    
+
     def put_attributes_in_hash?
       @put_attributes_in_hash
     end
-    
+
     def raise_error_if_using_put_attributes_in_hash_with_xml
       if @output_type != :hash && @put_attributes_in_hash
-        raise ArgumentError.new("put_attributes_in_hash! is only valid when using output_type = :hash (the default)'") 
+        raise ArgumentError.new("put_attributes_in_hash! is only valid when using output_type = :hash (the default)'")
       end
     end
   end

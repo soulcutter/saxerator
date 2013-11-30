@@ -5,7 +5,7 @@ module Saxerator
 
       def initialize(config, name, attributes)
         @config = config
-        @name = config.hash_key_generator.call(name)
+        @name = config.generate_key_for(name)
         @attributes = attributes
         @children = []
         @text = false
@@ -27,11 +27,11 @@ module Saxerator
           name = child.name
           element = child.block_variable
 
-          add_to_hash_element( hash, name, element)         
+          add_to_hash_element( hash, name, element)
         end
 
         if @config.put_attributes_in_hash?
-          
+
           @attributes.each do |attribute|
             attribute.each_slice(2) do |name, element|
               add_to_hash_element( hash, name, element)
@@ -41,9 +41,9 @@ module Saxerator
 
         hash
       end
-      
+
       def add_to_hash_element( hash, name, element)
-        name = @config.hash_key_generator.call(name)
+        name = @config.generate_key_for(name)
         if hash[name]
           if !hash[name].is_a?(Array)
             hash[name] = ArrayElement[hash[name]]
