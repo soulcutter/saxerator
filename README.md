@@ -1,4 +1,4 @@
-Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png?branch=master)](http://travis-ci.org/soulcutter/saxerator)
+Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png?branch=master)](http://travis-ci.org/soulcutter/saxerator) [![Code Climate](https://codeclimate.com/github/soulcutter/saxerator.png)](https://codeclimate.com/github/soulcutter/saxerator)
 =========
 
 Saxerator is a streaming xml-to-hash parser designed for working with very large xml files by
