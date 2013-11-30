@@ -1,7 +1,7 @@
 module Saxerator
   module DSL
-    def for_tag(tag)
-      for_tags([tag])
+    def for_tag(*tags)
+      for_tags(tags)
     end
 
     def for_tags(tags)
