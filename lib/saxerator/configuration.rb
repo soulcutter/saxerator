@@ -6,6 +6,7 @@ module Saxerator
     def initialize
       @output_type = :hash
       @put_attributes_in_hash = false
+      @ignore_namespaces = false
     end
 
     def output_type=(val)
@@ -37,6 +38,14 @@ module Saxerator
       else
         @hash_key_normalizer = lambda { |x| x.to_s.gsub(/\w+:/, '') }
       end
+    end
+
+    def ignore_namespaces?
+      @ignore_namespaces
+    end
+
+    def ignore_namespaces!
+      @ignore_namespaces = true
     end
 
     def put_attributes_in_hash!
