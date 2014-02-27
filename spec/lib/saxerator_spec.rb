@@ -65,6 +65,22 @@ describe Saxerator do
       specify { parser.all.name.should == :foo }
     end
 
+    context "with ignore namespaces" do
+      let(:xml) { "<ns1:foo xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ns1=\"http://foo.com\" xmlns:ns3=\"http://bar.com\"><ns3:bar>baz</ns3:bar></ns1:foo>" }
+      subject(:parser) do
+        Saxerator.parser(xml) { |config| config.ignore_namespaces! }
+      end
+
+      specify {
+        bar_count = 0
+        parser.for_tag("bar").each do |tag|
+          bar_count += 1
+        end
+
+        bar_count.should == 1
+      }
+    end
+
     context "with strip namespaces" do
       let(:xml) { "<ns1:foo><ns3:bar>baz</ns3:bar></ns1:foo>" }
       subject(:parser) do
