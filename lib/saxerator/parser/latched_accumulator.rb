@@ -4,6 +4,7 @@ module Saxerator
       def initialize(config, latches, block)
         @latches = latches
         @accumulator = Accumulator.new(config, block)
+        @ignore_namespaces = config.ignore_namespaces?
       end
 
       def check_latches_and_passthrough(method, *args)
@@ -35,10 +36,12 @@ module Saxerator
       end
 
       def start_element_namespace(name, attrs = [], prefix = nil, uri = nil, ns = [])
+        return start_element(name, attrs) if @ignore_namespaces
         check_latches_and_passthrough(:start_element_namespace, name, attrs, prefix, uri, ns)
       end
 
       def end_element_namespace(name, prefix = nil, uri = nil)
+        return end_element(name) if @ignore_namespaces
         check_latches_and_passthrough(:end_element_namespace, name, prefix, uri)
       end
 
