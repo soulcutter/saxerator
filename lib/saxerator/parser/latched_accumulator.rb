@@ -36,12 +36,20 @@ module Saxerator
       end
 
       def start_element_namespace(name, attrs = [], prefix = nil, uri = nil, ns = [])
-        return start_element(name, attrs) if @ignore_namespaces
+        if @ignore_namespaces
+          prefix, uri, ns = nil, nil, []
+          attrs.each do |attr|
+            attr.prefix = nil if attr.respond_to? :prefix
+            attr.uri = nil if attr.respond_to? :uri
+          end
+        end
         check_latches_and_passthrough(:start_element_namespace, name, attrs, prefix, uri, ns)
       end
 
       def end_element_namespace(name, prefix = nil, uri = nil)
-        return end_element(name) if @ignore_namespaces
+        if @ignore_namespaces
+          prefix, uri = nil
+        end
         check_latches_and_passthrough(:end_element_namespace, name, prefix, uri)
       end
 
