@@ -66,9 +66,18 @@ describe Saxerator do
     end
 
     context "with ignore namespaces" do
-      let(:xml) { "<ns1:foo xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ns1=\"http://foo.com\" xmlns:ns3=\"http://bar.com\"><ns3:bar>baz</ns3:bar></ns1:foo>" }
+      let(:xml) { <<-eos
+<ns1:foo xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ns1="http://foo.com" xmlns:ns3="http://bar.com">
+  <ns3:bar>baz</ns3:bar>
+  <ns3:bar bar="bar" ns1:foo="foo" class="class">bax</ns3:bar>
+</ns1:foo>
+ eos
+}
+
       subject(:parser) do
-        Saxerator.parser(xml) { |config| config.ignore_namespaces! }
+        Saxerator.parser(xml) { |config| 
+          config.ignore_namespaces! 
+        }
       end
 
       specify {
@@ -76,8 +85,7 @@ describe Saxerator do
         parser.for_tag("bar").each do |tag|
           bar_count += 1
         end
-
-        bar_count.should == 1
+        bar_count.should == 2
       }
     end
 
