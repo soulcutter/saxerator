@@ -1,3 +1,5 @@
+require 'saxerator/builder/array_element'
+
 module Saxerator
   module Builder
     class StringElement < String
@@ -8,6 +10,13 @@ module Saxerator
         self.name = name
         self.attributes = attributes
         super(str)
+      end
+
+      def to_a
+        array = ArrayElement.new
+        array << self
+        array.name = name
+        array
       end
     end
   end

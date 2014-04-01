@@ -13,6 +13,12 @@ module Saxerator
       def to_h
         HashElement.new(name, attributes)
       end
+
+      def to_a
+        array = ArrayElement.new
+        array.name = name
+        array
+      end
     end
   end
 end
