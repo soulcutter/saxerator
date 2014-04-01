@@ -16,6 +16,10 @@ module Saxerator
         @children << node
       end
 
+      def to_empty_element
+        EmptyElement.new(@name, @attributes)
+      end
+
       def to_s
         StringElement.new(@children.join, @name, @attributes)
       end
@@ -27,14 +31,14 @@ module Saxerator
           name = child.name
           element = child.block_variable
 
-          add_to_hash_element( hash, name, element)
+          add_to_hash_element(hash, name, element)
         end
 
         if @config.put_attributes_in_hash?
 
           @attributes.each do |attribute|
             attribute.each_slice(2) do |name, element|
-              add_to_hash_element( hash, name, element)
+              add_to_hash_element(hash, name, element)
             end
           end
         end
@@ -56,7 +60,9 @@ module Saxerator
       end
 
       def block_variable
-        @text ? to_s : to_hash
+        return to_s if @text
+        return to_hash if @children.count > 0
+        to_empty_element
       end
     end
   end

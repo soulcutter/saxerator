@@ -33,5 +33,26 @@ describe "Saxerator (default) hash format" do
   specify { entry['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>" }
 
   # empty element
-  specify { entry['media:thumbnail'].should == {} }
+  context "parsing an empty element" do
+    subject(:element) { entry['media:thumbnail'] }
+
+    it "behaves somewhat like nil" do
+      element.should be_nil
+      (!element).should eq true
+      element.to_s.should eq ''
+      element.to_h.should eq Hash.new
+    end
+
+    it { should be_empty }
+
+    it "has attributes" do
+      element.attributes.keys.should eq ['url']
+    end
+
+    [:to_s, :to_h].each do |conversion|
+      it "preserves attributes through ##{conversion}" do
+        element.send(conversion).attributes.keys.should eq ['url']
+      end
+    end
+  end
 end
