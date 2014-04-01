@@ -1,3 +1,5 @@
+require 'saxerator/builder/array_element'
+
 module Saxerator
   module Builder
     class HashElement < Hash
@@ -7,6 +9,13 @@ module Saxerator
       def initialize(name, attributes)
         self.name = name
         self.attributes = attributes
+      end
+
+      def to_a
+        array = ArrayElement.new
+        array.name = name
+        array.concat super
+        array
       end
     end
   end

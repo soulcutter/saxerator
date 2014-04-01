@@ -26,6 +26,24 @@ describe "Saxerator (default) hash format" do
   # name on a string
   specify { entry['title'].name.should == 'title' }
 
+  describe "#to_a" do
+    it "preserves the element name on a parsed hash" do
+      entry.to_a.name.should == 'entry'
+    end
+
+    it "converts parsed hashes to nested key/value pairs (just like regular hashes)" do
+      entry.to_a.first.should == ['id', '1']
+    end
+
+    it "preserves the element name on a parsed string" do
+      entry['title'].to_a.name.should == 'title'
+    end
+
+    it "preserves the element name on an array" do
+      entry['contributor'].to_a.name.should eq 'contributor'
+    end
+  end
+
   # name on an array
   specify { entry['contributor'].name.should == 'contributor' }
 
@@ -47,6 +65,12 @@ describe "Saxerator (default) hash format" do
 
     it "has attributes" do
       element.attributes.keys.should eq ['url']
+    end
+
+    [:to_s, :to_h, :to_a].each do |conversion|
+      it "preserves the element name through ##{conversion}" do
+        element.send(conversion).name.should eq 'media:thumbnail'
+      end
     end
 
     [:to_s, :to_h].each do |conversion|
