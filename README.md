@@ -119,8 +119,7 @@ Why not DOM parsing?
   > DOM parsers load the entire document into memory. Saxerator only holds a single chunk in memory at a time. If your
   > document is very large, this can be an important consideration.
 
-When I fetch a tag that has one or more elements, sometimes I get an `Array`, and other times I get a `Hash` or `String`
-- how can I treat these consistently?
+When I fetch a tag that has one or more elements, sometimes I get an `Array`, and other times I get a `Hash` or `String`. Is there a way I can treat these consistently?
 
   > You can treat objects consistently as arrays using
   > [Ruby's built-in array conversion method](http://www.ruby-doc.org/core-2.1.1/Kernel.html#method-i-Array)
