@@ -26,6 +26,18 @@ describe "Saxerator (default) hash format" do
   # name on a string
   specify { entry['title'].name.should == 'title' }
 
+  describe "#to_s" do
+    it "preserves the element name" do
+      entry['title'].to_a.name.should == 'title'
+    end
+  end
+
+  describe "#to_h" do
+    it "preserves the element name" do
+      entry.to_h.name.should == 'entry'
+    end
+  end
+
   describe "#to_a" do
     it "preserves the element name on a parsed hash" do
       entry.to_a.name.should == 'entry'
@@ -50,7 +62,6 @@ describe "Saxerator (default) hash format" do
   # character entity decoding
   specify { entry['content'].should == "<p>Airplanes are very large — this can present difficulty in digestion.</p>" }
 
-  # empty element
   context "parsing an empty element" do
     subject(:element) { entry['media:thumbnail'] }
 
