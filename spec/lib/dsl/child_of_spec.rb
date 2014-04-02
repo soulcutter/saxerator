@@ -21,16 +21,16 @@ describe "Saxerator::DSL#child_of" do
   end
 
   it "should only parse children of the specified tag" do
-    parser.child_of(:grandchildren).inject([], :<<).should == [
+    expect(parser.child_of(:grandchildren).inject([], :<<)).to eq([
         'Mildred Marston'
-    ]
+    ])
   end
 
   it "should work in combination with #for_tag" do
-    parser.for_tag(:name).child_of(:children).inject([], :<<).should == [
+    expect(parser.for_tag(:name).child_of(:children).inject([], :<<)).to eq([
         'Rudy McMannis',
         'Tom McMannis',
         'Anne Welsh'
-    ]
+    ])
   end
 end

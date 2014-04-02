@@ -9,7 +9,7 @@ describe "Saxerator xml format" do
     end.for_tag(:entry).first
   end
 
-  it { should be_a(Nokogiri::XML::Node) }
+  it { is_expected.to be_a(Nokogiri::XML::Node) }
   it "looks like the original document" do
     expected_xml = <<-eos
 <?xml version="1.0"?>
@@ -32,6 +32,6 @@ describe "Saxerator xml format" do
   </contributor>
 </entry>
     eos
-    entry.to_xml.should == expected_xml
+    expect(entry.to_xml).to eq(expected_xml)
   end
 end

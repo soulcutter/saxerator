@@ -16,13 +16,13 @@ describe "Saxerator::DSL#with_attribute" do
   end
 
   it "should match tags with the specified attributes" do
-    subject.with_attribute(:type).inject([], :<<).should == [
+    expect(subject.with_attribute(:type).inject([], :<<)).to eq([
         'Leviticus Alabaster',
         'Eunice Diesel'
-    ]
+    ])
   end
 
   it "should match tags with the specified attributes" do
-    subject.with_attribute(:type, :primary).inject([], :<<).should == ['Leviticus Alabaster']
+    expect(subject.with_attribute(:type, :primary).inject([], :<<)).to eq(['Leviticus Alabaster'])
   end
 end
