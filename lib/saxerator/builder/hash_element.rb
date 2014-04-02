@@ -17,6 +17,8 @@ module Saxerator
         array.concat super
         array
       end
+
+      def to_h; self end
     end
   end
 end
