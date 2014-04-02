@@ -10,14 +10,14 @@ describe Saxerator do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 
       it "should be able to parse it" do
-        parser.all.should == {'blurb' => ['one', 'two', 'three']}
+        expect(parser.all).to eq({'blurb' => ['one', 'two', 'three']})
       end
 
       it "should allow multiple operations on the same parser" do
         # This exposes a bug where if a File is not reset only the first
         # Enumerable method works as expected
-        parser.for_tag(:blurb).first.should == 'one'
-        parser.for_tag(:blurb).first.should == 'one'
+        expect(parser.for_tag(:blurb).first).to eq('one')
+        expect(parser.for_tag(:blurb).first).to eq('one')
       end
     end
 
@@ -32,7 +32,7 @@ describe Saxerator do
       end
 
       it "should be able to parse it" do
-        parser.all.should == { 'name' => 'Illiterates that can read', 'author' => 'Eunice Diesel' }
+        expect(parser.all).to eq({ 'name' => 'Illiterates that can read', 'author' => 'Eunice Diesel' })
       end
     end
   end
@@ -47,7 +47,7 @@ describe Saxerator do
 
       context "with config.output_type = :hash" do
         let(:output_type) { :hash }
-        specify { parser.all.should == {'bar' => 'baz'} }
+        specify { expect(parser.all).to eq({'bar' => 'baz'}) }
       end
 
       context "with an invalid config.output_type" do
@@ -61,8 +61,8 @@ describe Saxerator do
         Saxerator.parser(xml) { |config| config.symbolize_keys! }
       end
 
-      specify { parser.all.should == { :bar => 'baz' } }
-      specify { parser.all.name.should == :foo }
+      specify { expect(parser.all).to eq({ :bar => 'baz' }) }
+      specify { expect(parser.all.name).to eq(:foo) }
     end
 
     context "with ignore namespaces" do
@@ -85,7 +85,7 @@ describe Saxerator do
         parser.for_tag("bar").each do |tag|
           bar_count += 1
         end
-        bar_count.should == 2
+        expect(bar_count).to eq(2)
       }
     end
 
@@ -95,8 +95,8 @@ describe Saxerator do
         Saxerator.parser(xml) { |config| config.strip_namespaces! }
       end
 
-      specify { parser.all.should == {'bar' => 'baz'} }
-      specify { parser.all.name.should == 'foo' }
+      specify { expect(parser.all).to eq({'bar' => 'baz'}) }
+      specify { expect(parser.all.name).to eq('foo') }
 
       context "combined with symbolize keys" do
         subject(:parser) do
@@ -106,7 +106,7 @@ describe Saxerator do
           end
         end
 
-        specify { parser.all.should == {:bar => 'baz'} }
+        specify { expect(parser.all).to eq({:bar => 'baz'}) }
       end
 
       context "for specific namespaces" do
@@ -122,8 +122,8 @@ describe Saxerator do
           Saxerator.parser(xml) { |config| config.strip_namespaces! :ns1, :ns3 }
         end
 
-        specify { parser.all.should == {'ns2:bar' => 'baz', 'bar' => 'biz'} }
-        specify { parser.all.name.should == 'foo' }
+        specify { expect(parser.all).to eq({'ns2:bar' => 'baz', 'bar' => 'biz'}) }
+        specify { expect(parser.all.name).to eq('foo') }
       end
     end
 
@@ -139,7 +139,7 @@ describe Saxerator do
     end
 
     it "should be able to parse it" do
-      parser.all.should == { 'bar' => 'baz', 'foo' => 'bar' }
+      expect(parser.all).to eq({ 'bar' => 'baz', 'foo' => 'bar' })
     end
 
   end

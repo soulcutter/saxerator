@@ -15,6 +15,6 @@ describe "Saxerator::DSL#for_tag" do
   end
 
   it "should only select the specified tag" do
-    parser.for_tag(:blurb).inject([], :<<).should == ['one', 'two', 'three']
+    expect(parser.for_tag(:blurb).inject([], :<<)).to eq(['one', 'two', 'three'])
   end
 end
