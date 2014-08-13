@@ -35,7 +35,6 @@ module Saxerator
         end
 
         if @config.put_attributes_in_hash?
-
           @attributes.each do |attribute|
             attribute.each_slice(2) do |name, element|
               add_to_hash_element(hash, name, element)
@@ -61,7 +60,7 @@ module Saxerator
 
       def block_variable
         return to_s if @text
-        return to_hash if @children.count > 0
+        return to_hash if @children.count > 0 || (@attributes.count > 0 && @config.put_attributes_in_hash?)
         to_empty_element
       end
     end
