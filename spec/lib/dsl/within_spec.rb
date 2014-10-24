@@ -16,13 +16,13 @@ describe "Saxerator::DSL#within" do
   end
 
   it "should only parse elements nested within the specified tag" do
-    parser.within(:article).inject([], :<<).should == [
+    expect(parser.within(:article).inject([], :<<)).to eq([
         'Is our children learning?',
         'Hazel Nutt'
-    ]
+    ])
   end
 
   it "should work in combination with #for_tag" do
-    parser.for_tag(:name).within(:article).inject([], :<<).should == ['Is our children learning?']
+    expect(parser.for_tag(:name).within(:article).inject([], :<<)).to eq(['Is our children learning?'])
   end
 end

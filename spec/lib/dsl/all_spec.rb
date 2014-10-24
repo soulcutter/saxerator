@@ -16,7 +16,7 @@ describe "Saxerator::FullDocument#all" do
   end
 
   it "should allow you to parse an entire document" do
-    parser.all.should == {'blurb' => ['one', 'two', 'three'], 'notablurb' => 'four', 'empty' => {} }
+    expect(parser.all).to eq 'blurb' => ['one', 'two', 'three'], 'notablurb' => 'four', 'empty' => {}
   end
 
   context "with_put_attributes_in_hash" do
@@ -25,7 +25,7 @@ describe "Saxerator::FullDocument#all" do
     end
 
     it "should allow you to parse an entire document" do
-      parser.all.should == {'blurb' => ['one', 'two', 'three'], 'notablurb' => 'four', 'empty' => { "with" => "attribute"}}
+      expect(parser.all).to eq 'blurb' => ['one', 'two', 'three'], 'notablurb' => 'four', 'empty' => { "with" => "attribute" }
     end
   end
 end
