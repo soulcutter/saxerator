@@ -6,7 +6,7 @@ module Saxerator
       def initialize(config, name, attributes)
         @config = config
         @name = config.generate_key_for(name)
-        @attributes = attributes
+        @attributes = normalize_attributes(attributes)
         @children = []
         @text = false
       end
@@ -46,9 +46,9 @@ module Saxerator
       end
 
       def add_to_hash_element( hash, name, element)
-        name = @config.generate_key_for(name)
+        name = generate_key(name)
         if hash[name]
-          if !hash[name].is_a?(Array)
+          unless hash[name].is_a?(Array)
             hash[name] = ArrayElement[hash[name]]
             hash[name].name = name
           end
@@ -62,6 +62,14 @@ module Saxerator
         return to_s if @text
         return to_hash if @children.count > 0 || (@attributes.count > 0 && @config.put_attributes_in_hash?)
         to_empty_element
+      end
+
+      def normalize_attributes(attributes)
+        Hash[attributes.map {|key, value| [generate_key(key), value] }]
+      end
+
+      def generate_key(name)
+        @config.generate_key_for(name)
       end
     end
   end

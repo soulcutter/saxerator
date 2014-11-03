@@ -38,7 +38,7 @@ describe Saxerator do
   end
 
   context "configuration" do
-    let(:xml) { "<foo><bar>baz</bar></foo>" }
+    let(:xml) { '<foo><bar foo="bar">baz</bar></foo>' }
 
     context "output type" do
       subject(:parser) do
@@ -47,7 +47,13 @@ describe Saxerator do
 
       context "with config.output_type = :hash" do
         let(:output_type) { :hash }
-        specify { expect(parser.all).to eq({'bar' => 'baz'}) }
+        specify { expect(parser.all).to eq('bar' => 'baz') }
+      end
+
+      context "with config.output_type = :xml" do
+        let(:output_type) { :xml }
+        specify { expect(parser.all).to be_a Nokogiri::XML::Document }
+        specify { expect(parser.all.to_s).to include '<bar foo="bar">' }
       end
 
       context "with an invalid config.output_type" do
@@ -58,11 +64,20 @@ describe Saxerator do
 
     context "symbolize keys" do
       subject(:parser) do
-        Saxerator.parser(xml) { |config| config.symbolize_keys! }
+        Saxerator.parser(xml) do |config|
+          config.symbolize_keys!
+          config.output_type = :hash
+        end
       end
 
-      specify { expect(parser.all).to eq({ :bar => 'baz' }) }
+      specify { expect(parser.all).to eq(:bar => 'baz') }
       specify { expect(parser.all.name).to eq(:foo) }
+
+      it 'will symbolize attributes' do
+        parser.for_tag('bar').each do |tag|
+          expect(tag.attributes).to include(:foo => 'bar')
+        end
+      end
     end
 
     context "with ignore namespaces" do
@@ -75,8 +90,8 @@ describe Saxerator do
 }
 
       subject(:parser) do
-        Saxerator.parser(xml) { |config| 
-          config.ignore_namespaces! 
+        Saxerator.parser(xml) { |config|
+          config.ignore_namespaces!
         }
       end
 
@@ -142,21 +157,30 @@ describe Saxerator do
       expect(parser.all).to eq({ 'bar' => 'baz', 'foo' => 'bar' })
     end
 
-  end
+    context 'with configured output_type :xml' do
+      subject(:parser) do
+        Saxerator.parser(xml) do |config|
+          config.put_attributes_in_hash!
+          config.output_type = :xml
+        end
+      end
 
-  context "configuration with put_attributes_in_hash! and config.output_type = :xml" do
-    let(:xml) { '<foo foo="bar"><bar>baz</bar></foo>' }
-
-    subject(:parser) do
-      Saxerator.parser(xml) do |config|
-        config.put_attributes_in_hash!
-        config.output_type = :xml
+      context "should raise error with " do
+        specify { expect { parser }.to raise_error(ArgumentError) }
       end
     end
 
-    context "should raise error with " do
-      specify { expect { parser }.to raise_error(ArgumentError) }
+    context 'with symbolize_keys!' do
+      subject(:parser) do
+        Saxerator.parser(xml) do |config|
+          config.put_attributes_in_hash!
+          config.symbolize_keys!
+        end
+      end
+
+      it 'will symbolize attribute hash keys' do
+        expect(parser.all).to include(:bar => 'baz', :foo => 'bar')
+      end
     end
   end
-
 end
