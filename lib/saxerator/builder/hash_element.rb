@@ -6,7 +6,7 @@ module Saxerator
       attr_accessor :attributes
       attr_accessor :name
 
-      def initialize(name, attributes)
+      def initialize(name = nil, attributes = nil)
         self.name = name
         self.attributes = attributes
       end
