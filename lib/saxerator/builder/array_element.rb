@@ -1,9 +1,14 @@
+require 'delegate'
+
 module Saxerator
   module Builder
-    class ArrayElement < Array
+    class ArrayElement < DelegateClass(Array)
       attr_accessor :name
 
-      def to_ary; self end
+      def initialize(arr = [])
+        super(arr)
+      end
+
       def to_a; self end
     end
   end
