@@ -1,14 +1,16 @@
 require 'saxerator/builder/array_element'
+require 'delegate'
 
 module Saxerator
   module Builder
-    class HashElement < Hash
+    class HashElement < DelegateClass(Hash)
       attr_accessor :attributes
       attr_accessor :name
 
       def initialize(name = nil, attributes = nil)
         self.name = name
         self.attributes = attributes
+        super({})
       end
 
       def to_a

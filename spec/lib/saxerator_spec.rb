@@ -179,7 +179,7 @@ describe Saxerator do
       end
 
       it 'will symbolize attribute hash keys' do
-        expect(parser.all).to include(:bar => 'baz', :foo => 'bar')
+        expect(parser.all.to_hash).to include(:bar => 'baz', :foo => 'bar')
       end
     end
   end

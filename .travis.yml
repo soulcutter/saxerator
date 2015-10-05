@@ -1,13 +1,12 @@
-script: "rspec spec"
+before_install:
+  - gem install bundler -v 1.10.6
+script: "bin/rspec spec"
 language: ruby
-bundler_args: --without coverage
+bundler_args: --without coverage --binstubs
+sudo: false
+cache: bundler
 rvm:
-  - 2.1.4
+  - 2.2.2
+  - 2.1.6
   - 2.0.0
   - 1.9.3
-  - jruby-19mode
-  - rbx-2
-matrix:
-  allow_failures:
-    - rvm: jruby-19mode
-    - rvm: rbx-2

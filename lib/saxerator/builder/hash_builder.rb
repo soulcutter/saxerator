@@ -45,11 +45,11 @@ module Saxerator
         hash
       end
 
-      def add_to_hash_element( hash, name, element)
+      def add_to_hash_element(hash, name, element)
         name = generate_key(name)
-        if hash[name]
-          unless hash[name].is_a?(Array)
-            hash[name] = ArrayElement[hash[name]]
+        if hash.key? name
+          unless hash[name].is_a?(ArrayElement)
+            hash[name] = ArrayElement.new([hash[name]])
             hash[name].name = name
           end
           hash[name] << element
