@@ -13,18 +13,19 @@ module Saxerator
 
       def initialize(reader)
         @reader = reader
+        @ignore_namespaces = reader.ignore_namespaces?
       end
 
       def_delegators :@reader, :start_element, :end_element, :characters
       def_delegator :@reader, :characters, :cdata_block
 
-      def start_element_namespace(name, attrs = [], prefix = nil, uri = nil, ns = [])
-        super unless @ignore_namespaces
+      def start_element_namespace(name, attrs = [], _prefix = nil, _uri = nil, _ns = [])
+        return super unless @ignore_namespaces
         start_element(name, strip_namespace(attrs))
       end
 
-      def end_element_namespace(name, prefix = nil, uri = nil)
-        super unless @ignore_namespaces
+      def end_element_namespace(name, _prefix = nil, _uri = nil)
+        return super unless @ignore_namespaces
         end_element(name)
       end
 

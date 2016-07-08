@@ -26,6 +26,10 @@ module Saxerator
       def characters(string)
         check_latches_and_passthrough(:characters, string)
       end
+
+      def ignore_namespaces?
+        @ignore_namespaces
+      end
     end
   end
 end
