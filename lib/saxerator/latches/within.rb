@@ -1,6 +1,6 @@
 module Saxerator
   module Latches
-    class Within < Nokogiri::XML::SAX::Document
+    class Within < ::Saxerator::SaxHandler
       def initialize(name)
         @name = name
         @depth_within_element = 0

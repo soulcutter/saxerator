@@ -1,6 +1,6 @@
 module Saxerator
   module Parser
-    class Accumulator < Nokogiri::XML::SAX::Document
+    class Accumulator < ::Saxerator::SaxHandler
       def initialize(config, block)
         @stack = []
         @config = config
@@ -24,8 +24,6 @@ module Saxerator
       def characters(string)
         @stack.last.add_node(string) unless string.strip.length == 0
       end
-
-      alias cdata_block characters
 
       def accumulating?
         @stack.size > 0

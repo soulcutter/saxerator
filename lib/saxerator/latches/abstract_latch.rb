@@ -1,6 +1,6 @@
 module Saxerator
   module Latches
-    class AbstractLatch < Nokogiri::XML::SAX::Document
+    class AbstractLatch < ::Saxerator::SaxHandler
       def open
         @open = true
       end
