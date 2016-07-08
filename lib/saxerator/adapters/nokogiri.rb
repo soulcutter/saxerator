@@ -20,12 +20,18 @@ module Saxerator
 
       def start_element_namespace(name, attrs = [], prefix = nil, uri = nil, ns = [])
         super unless @ignore_namespaces
-        start_element(name, attrs)
+        start_element(name, strip_namespace(attrs))
       end
 
       def end_element_namespace(name, prefix = nil, uri = nil)
         super unless @ignore_namespaces
         end_element(name)
+      end
+
+      private
+
+      def strip_namespace(attrs)
+        attrs.map { |attr| [attr.localname, attr.value] }
       end
     end
   end
