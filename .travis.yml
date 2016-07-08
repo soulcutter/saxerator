@@ -1,11 +1,12 @@
 before_install:
-  - gem install bundler -v 1.10.6
+  - gem install bundler -v 1.12.5
 script: "bin/rspec spec"
 language: ruby
 bundler_args: --without coverage --binstubs
 sudo: false
 cache: bundler
 rvm:
+  - 2.3.1
   - 2.2.2
   - 2.1.6
   - 2.0.0
