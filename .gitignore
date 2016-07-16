@@ -8,3 +8,5 @@ coverage/
 .rvmrc
 .ruby-version
 .ruby-gemset
+
+/spec/examples.txt

@@ -5,9 +5,10 @@ if ENV['COVERAGE']
   end
 end
 
-Dir['./spec/support/**/*.rb'].each { |f| require f }
+require 'support/fixture_file'
 
 RSpec.configure do |config|
+  config.example_status_persistence_file_path = "spec/examples.txt"
   config.include FixtureFile
 end
 
