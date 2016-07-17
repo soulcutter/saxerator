@@ -25,9 +25,9 @@ module Saxerator
     end
 
     def output_type=(val)
-      raise_exeption("Unknown output_type '#{val.inspect}'") unless Builder.valid?(val)
+      raise ArgumentError.new("Unknown output_type '#{val.inspect}'") unless Builder.valid?(val)
       unless ALLOWED_OUTPUT_TYPES[@adapter].include?(val)
-        raise_exeption("Adapter '#{adapter.inspect}' not allow to use output_type '#{val.inspect}'")
+        raise ArgumentError.new("Adapter '#{adapter.inspect}' not allow to use output_type '#{val.inspect}'")
       end
 
       @output_type = val
@@ -78,14 +78,8 @@ module Saxerator
 
     def raise_error_if_using_put_attributes_in_hash_with_xml
       if @output_type != :hash && @put_attributes_in_hash
-        raise_exeption("put_attributes_in_hash! is only valid when using output_type = :hash (the default)'")
+        raise ArgumentError.new("put_attributes_in_hash! is only valid when using output_type = :hash (the default)'")
       end
-    end
-
-    private
-
-    def raise_exeption(text)
-      raise ArgumentError, text
     end
   end
 end
