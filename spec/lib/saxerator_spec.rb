@@ -58,12 +58,6 @@ RSpec.shared_examples_for Saxerator do |adapter|
           specify { expect(parser.all).to eq('bar' => 'baz') }
         end
 
-        context "with config.output_type = :xml" do
-          let(:output_type) { :xml }
-          specify { expect(parser.all).to be_a Nokogiri::XML::Document }
-          specify { expect(parser.all.to_s).to include '<bar foo="bar">' }
-        end
-
         context "with an invalid config.output_type" do
           let(:output_type) { 'lmao' }
           specify { expect { parser }.to raise_error(ArgumentError) }
@@ -208,4 +202,36 @@ end
 describe Saxerator do
   it_behaves_like Saxerator, :ox
   it_behaves_like Saxerator, :nokogiri
+
+  context 'configuration' do
+    let(:xml) { '<foo><bar foo="bar">baz</bar></foo>' }
+
+    context 'output type' do
+      subject(:parser) do
+        Saxerator.parser(xml) do |config|
+          config.adapter = adapter
+          config.output_type = output_type
+        end
+      end
+
+      context 'ox adapter' do
+        let(:adapter) { :ox }
+
+        context 'with config.output_type = :xml' do
+          let(:output_type) { :xml }
+          specify { expect { parser }.to raise_error(ArgumentError) }
+        end
+      end
+
+      context 'nokogiri adapter' do
+        let(:adapter) { :nokogiri }
+
+        context 'with config.output_type = :xml' do
+          let(:output_type) { :xml }
+          specify { expect(parser.all).to be_a Nokogiri::XML::Document }
+          specify { expect(parser.all.to_s).to include '<bar foo="bar">' }
+        end
+      end
+    end
+  end
 end
