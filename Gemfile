@@ -7,4 +7,4 @@ group :coverage do
   gem 'simplecov'
 end
 
-gem 'pry-byebug', platforms: [:ruby_21, :ruby_22]
+gem 'pry-byebug', platforms: [:ruby_21, :ruby_22, :ruby_23]

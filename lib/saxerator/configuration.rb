@@ -4,9 +4,19 @@ module Saxerator
     attr_writer :hash_key_generator
 
     def initialize
+      @adapter = :nokogiri
       @output_type = :hash
       @put_attributes_in_hash = false
       @ignore_namespaces = false
+    end
+
+    def adapter=(name)
+      @adapter = name
+    end
+
+    def adapter
+      require "saxerator/adapters/#{@adapter}"
+      Saxerator::Adapters.const_get(@adapter.to_s.capitalize, false)
     end
 
     def output_type=(val)
