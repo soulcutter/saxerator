@@ -35,6 +35,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'nokogiri', '>= 1.4.0'
   s.add_development_dependency 'ox'
-
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3.1'
 end

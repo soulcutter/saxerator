@@ -6,8 +6,6 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
-require 'pry'
-
 namespace :spec do
   desc "Run specs against all available adapters"
   task :adapters do |t|
