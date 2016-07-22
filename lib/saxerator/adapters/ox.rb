@@ -54,6 +54,8 @@ module Saxerator
         reader.characters(str)
       end
 
+      alias :cdata :text
+
       private
 
       def reset!

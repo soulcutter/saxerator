@@ -1,8 +1,9 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "Saxerator xml format" do
+describe "Saxerator xml format", :nokogiri_only do
   let(:xml) { fixture_file('nested_elements.xml') }
+
   subject(:entry) do
     Saxerator.parser(xml) do |config|
       config.output_type = :xml
