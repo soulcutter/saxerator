@@ -1,10 +1,10 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
-describe Saxerator do
+RSpec.describe Saxerator do
   context "#parser" do
-    subject(:parser) { Saxerator.parser(xml) }
+    subject(:parser) do
+      Saxerator.parser(xml)
+    end
 
     context "with a File argument" do
       let(:xml) { fixture_file('flat_blurbs.xml') }
@@ -24,10 +24,10 @@ describe Saxerator do
     context "with a String argument" do
       let(:xml) do
         <<-eos
-          <book>
-            <name>Illiterates that can read</name>
-            <author>Eunice Diesel</author>
-          </book>
+        <book>
+          <name>Illiterates that can read</name>
+          <author>Eunice Diesel</author>
+        </book>
         eos
       end
 
@@ -42,7 +42,9 @@ describe Saxerator do
 
     context "output type" do
       subject(:parser) do
-        Saxerator.parser(xml) { |config| config.output_type = output_type }
+        Saxerator.parser(xml) do |config|
+          config.output_type = output_type
+        end
       end
 
       context "with config.output_type = :hash" do
@@ -50,7 +52,7 @@ describe Saxerator do
         specify { expect(parser.all).to eq('bar' => 'baz') }
       end
 
-      context "with config.output_type = :xml" do
+      context "with config.output_type = :xml", :nokogiri_only do
         let(:output_type) { :xml }
         specify { expect(parser.all).to be_a Nokogiri::XML::Document }
         specify { expect(parser.all.to_s).to include '<bar foo="bar">' }
@@ -83,16 +85,16 @@ describe Saxerator do
     context "with ignore namespaces" do
       let(:xml) { <<-eos
 <ns1:foo xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ns1="http://foo.com" xmlns:ns3="http://bar.com">
-  <ns3:bar>baz</ns3:bar>
-  <ns3:bar bar="bar" ns1:foo="foo" class="class">bax</ns3:bar>
+<ns3:bar>baz</ns3:bar>
+<ns3:bar bar="bar" ns1:foo="foo" class="class">bax</ns3:bar>
 </ns1:foo>
- eos
-}
+      eos
+      }
 
       subject(:parser) do
-        Saxerator.parser(xml) { |config|
+        Saxerator.parser(xml) do |config|
           config.ignore_namespaces!
-        }
+        end
       end
 
       specify {
@@ -107,7 +109,9 @@ describe Saxerator do
     context "with strip namespaces" do
       let(:xml) { "<ns1:foo><ns3:bar>baz</ns3:bar></ns1:foo>" }
       subject(:parser) do
-        Saxerator.parser(xml) { |config| config.strip_namespaces! }
+        Saxerator.parser(xml) do |config|
+          config.strip_namespaces!
+        end
       end
 
       specify { expect(parser.all).to eq({'bar' => 'baz'}) }
@@ -127,14 +131,16 @@ describe Saxerator do
       context "for specific namespaces" do
         let(:xml) do
           <<-XML.gsub /^ {10}/, ''
-          <ns1:foo>
-            <ns2:bar>baz</ns2:bar>
-            <ns3:bar>biz</ns3:bar>
-          </ns1:foo>
+        <ns1:foo>
+          <ns2:bar>baz</ns2:bar>
+          <ns3:bar>biz</ns3:bar>
+        </ns1:foo>
           XML
         end
         subject(:parser) do
-          Saxerator.parser(xml) { |config| config.strip_namespaces! :ns1, :ns3 }
+          Saxerator.parser(xml) do |config|
+            config.strip_namespaces! :ns1, :ns3
+          end
         end
 
         specify { expect(parser.all).to eq({'ns2:bar' => 'baz', 'bar' => 'biz'}) }
