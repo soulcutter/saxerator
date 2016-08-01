@@ -18,14 +18,12 @@ module Saxerator
       def initialize(reader)
         @reader = reader
 
-        @attributes = Hash.new
+        @attributes = {}
         @name = ''
       end
 
       def guard!
-        if name.length > 0
-          reader.start_element(name, attributes.to_a)
-        end
+        reader.start_element(name, attributes.to_a) unless name.empty?
         reset!
       end
 
@@ -54,7 +52,7 @@ module Saxerator
         reader.characters(str)
       end
 
-      alias :cdata :text
+      alias cdata text
 
       private
 
@@ -64,7 +62,7 @@ module Saxerator
       end
 
       def strip_namespace(name)
-        name.split(":").last
+        name.split(':').last
       end
     end
   end

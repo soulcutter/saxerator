@@ -13,7 +13,7 @@ module Saxerator
     def camel_case(str)
       str = str.to_s
       return str if str !~ /_/ && str =~ /[A-Z]+.*/
-      str.split('_').map{|e| e.capitalize}.join
+      str.split('_').map(&:capitalize).join
     end
   end
 end

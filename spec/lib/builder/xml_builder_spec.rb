@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "Saxerator xml format", :nokogiri_only do
+describe 'Saxerator xml format', :nokogiri_only do
   let(:xml) { fixture_file('nested_elements.xml') }
 
   subject(:entry) do
@@ -11,7 +11,7 @@ describe "Saxerator xml format", :nokogiri_only do
   end
 
   it { is_expected.to be_a(Nokogiri::XML::Node) }
-  it "looks like the original document" do
+  it 'looks like the original document' do
     expected_xml = <<-eos
 <?xml version="1.0"?>
 <entry>

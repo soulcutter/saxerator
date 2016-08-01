@@ -22,11 +22,11 @@ module Saxerator
       end
 
       def characters(string)
-        @stack.last.add_node(string) unless string.strip.length == 0
+        @stack.last.add_node(string) unless string.strip.empty?
       end
 
       def accumulating?
-        @stack.size > 0
+        !@stack.empty?
       end
     end
   end

@@ -7,11 +7,11 @@ module Saxerator
         @names = names
       end
 
-      def start_element name, _
+      def start_element(name, _)
         @names.include?(name) ? open : close
       end
 
-      def end_element name
+      def end_element(name)
         close if @names.include?(name)
       end
     end

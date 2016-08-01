@@ -28,4 +28,4 @@ File.open(filename, 'w') do |f|
   end
   f.puts '</artists>'
 end
-puts "DONE!"
+puts 'DONE!'

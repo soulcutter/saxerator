@@ -5,7 +5,7 @@ module Saxerator
     end
 
     def for_tags(tags)
-      raise ArgumentError.new('#for_tags requires an Array argument') unless tags.is_a? Array
+      raise ArgumentError, '#for_tags requires an Array argument' unless tags.is_a? Array
       specify Latches::ForTags.new(tags.map(&:to_s))
     end
 
@@ -22,21 +22,22 @@ module Saxerator
     end
 
     def with_attribute(name, value = nil)
-      specify Latches::WithAttributes.new({name.to_s => !!value ? value.to_s : nil })
+      specify Latches::WithAttributes.new(name.to_s => !value.nil? ? value.to_s : nil)
     end
 
     def with_attributes(attrs)
       if attrs.is_a? Array
-        attrs = Hash[attrs.map { |k| [k, nil]}]
+        attrs = Hash[attrs.map { |k| [k, nil] }]
       elsif attrs.is_a? Hash
-        attrs = Hash[attrs.map{ |k, v| [k.to_s, v ? v.to_s : v]}]
+        attrs = Hash[attrs.map { |k, v| [k.to_s, v ? v.to_s : v] }]
       else
-        raise ArgumentError.new("attributes should be a Hash or Array")
+        raise ArgumentError, 'attributes should be a Hash or Array'
       end
       specify Latches::WithAttributes.new(attrs)
     end
 
     private
+
     def specify(predicate)
       DocumentFragment.new(@source, @config, @latches + [predicate])
     end
