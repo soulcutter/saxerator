@@ -15,6 +15,7 @@ module Saxerator
     end
 
     def adapter=(name)
+      raise ArgumentError.new("Unknown adapter '#{name.inspect}'") unless ALLOWED_OUTPUT_TYPES.has_key?(name)
       @adapter = name
     end
 
