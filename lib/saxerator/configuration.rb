@@ -1,6 +1,5 @@
 module Saxerator
   class Configuration
-    attr_reader :output_type
     attr_writer :hash_key_generator
 
     ALLOWED_OUTPUT_TYPES = {
@@ -32,6 +31,10 @@ module Saxerator
 
       @output_type = val
       raise_error_if_using_put_attributes_in_hash_with_xml
+    end
+
+    def output_type
+      @_output_type ||= Builder.to_class(@output_type)
     end
 
     def generate_key_for(val)
