@@ -5,7 +5,8 @@ module Saxerator
     class ArrayElement < DelegateClass(Array)
       attr_accessor :name
 
-      def initialize(arr = [])
+      def initialize(arr = [], name = nil)
+        @name = name
         super(arr)
       end
 

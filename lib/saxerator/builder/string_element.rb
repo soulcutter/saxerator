@@ -8,16 +8,13 @@ module Saxerator
       attr_accessor :name
 
       def initialize(str, name, attributes)
-        self.name = name
-        self.attributes = attributes
+        @name = name
+        @attributes = attributes
         super(str)
       end
 
       def to_a
-        array = ArrayElement.new
-        array << self
-        array.name = name
-        array
+        ArrayElement.new(self, name)
       end
     end
   end
