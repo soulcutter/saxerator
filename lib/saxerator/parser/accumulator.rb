@@ -14,14 +14,14 @@ module Saxerator
       def end_element(_)
         if @stack.size > 1
           last = @stack.pop
-          @stack.last.add_node last
+          @stack[-1].add_node last
         else
           @block.call(@stack.pop.block_variable)
         end
       end
 
       def characters(string)
-        @stack.last.add_node(string) unless string.strip.length == 0
+        @stack[-1].add_node(string) unless string.strip.length == 0
       end
 
       def accumulating?
