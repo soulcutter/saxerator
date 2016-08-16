@@ -52,9 +52,9 @@ RSpec.describe Saxerator do
         specify { expect(parser.all).to eq('bar' => 'baz') }
       end
 
-      context 'with config.output_type = :xml', :nokogiri_only do
+      context 'with config.output_type = :xml' do
         let(:output_type) { :xml }
-        specify { expect(parser.all).to be_a Nokogiri::XML::Document }
+        specify { expect(parser.all).to be_a REXML::Document }
         specify { expect(parser.all.to_s).to include '<bar foo="bar">' }
       end
 
