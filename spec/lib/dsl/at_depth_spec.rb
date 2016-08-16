@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Saxerator::DSL#at_depth" do
+describe 'Saxerator::DSL#at_depth' do
   subject(:parser) { Saxerator.parser(xml) }
 
   let(:xml) do
@@ -18,17 +18,19 @@ describe "Saxerator::DSL#at_depth" do
     eos
   end
 
-  it "should parse elements at the requested tag depth" do
+  it 'should parse elements at the requested tag depth' do
     expect(parser.at_depth(2).inject([], :<<)).to eq([
-      'How to eat an airplane', 'Leviticus Alabaster',
-      'To wallop a horse in the face', 'Jeanne Clarewood'
+      'How to eat an airplane',
+      'Leviticus Alabaster',
+      'To wallop a horse in the face',
+      'Jeanne Clarewood'
     ])
   end
 
-  it "should work in combination with #for_tag" do
+  it 'should work in combination with #for_tag' do
     expect(parser.at_depth(2).for_tag(:name).inject([], :<<)).to eq([
-        'How to eat an airplane',
-        'To wallop a horse in the face'
+      'How to eat an airplane',
+      'To wallop a horse in the face'
     ])
   end
 end

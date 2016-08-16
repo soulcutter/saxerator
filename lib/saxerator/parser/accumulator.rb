@@ -25,7 +25,7 @@ module Saxerator
       end
 
       def accumulating?
-        @stack.size > 0
+        !@stack.empty?
       end
     end
   end

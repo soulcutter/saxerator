@@ -9,10 +9,7 @@ module Saxerator
 
       def check_latches_and_passthrough(method, *args)
         @latches.each { |latch| latch.send(method, *args) }
-        if @accumulator.accumulating? ||
-            @latches.all? { |latch| latch.open? }
-          @accumulator.send(method, *args)
-        end
+        @accumulator.send(method, *args) if @accumulator.accumulating? || @latches.all?(&:open?)
       end
 
       def start_element(name, attrs = [])

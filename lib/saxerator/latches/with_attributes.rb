@@ -7,7 +7,7 @@ module Saxerator
         @attrs = attrs
       end
 
-      def start_element _, attributes
+      def start_element(_, attributes)
         attributes = Hash[attributes]
         if @attrs.all? { |k, v| attributes[k] && (v.nil? || attributes[k] == v) }
           open
@@ -16,7 +16,7 @@ module Saxerator
         end
       end
 
-      def end_element _
+      def end_element(_)
         close
       end
     end

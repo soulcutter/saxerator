@@ -59,12 +59,14 @@ module Saxerator
 
       def block_variable
         return to_s if @text
-        return to_hash if @children.count > 0 || (@attributes.count > 0 && @config.put_attributes_in_hash?)
+        if @children.count > 0 || (@attributes.count > 0 && @config.put_attributes_in_hash?)
+          return to_hash
+        end
         to_empty_element
       end
 
       def normalize_attributes(attributes)
-        Hash[attributes.map {|key, value| [generate_key(key), value] }]
+        Hash[attributes.map { |key, value| [generate_key(key), value] }]
       end
 
       def generate_key(name)

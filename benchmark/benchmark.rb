@@ -1,9 +1,9 @@
-$:.push File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../../lib', __FILE__)
 require 'saxerator'
 require 'benchmark'
 
 file = ARGV.shift
-unless File.exists?(file)
+unless File.exist?(file)
   puts "Cannot find file #{file}"
   exit 1
 end
@@ -16,7 +16,7 @@ class SaxeratorBenchmark
     @file = file
   end
 
-  def with_adapter(adapter)
+  def with_adapter(adapter) # rubocop:disable Metrics/MethodLength
     puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
     puts
     puts "Benchmark with :#{adapter} parser"

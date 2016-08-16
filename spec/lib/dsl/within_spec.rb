@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Saxerator::DSL#within" do
+describe 'Saxerator::DSL#within' do
   subject(:parser) { Saxerator.parser(xml) }
 
   let(:xml) do
@@ -15,14 +15,15 @@ describe "Saxerator::DSL#within" do
     eos
   end
 
-  it "should only parse elements nested within the specified tag" do
+  it 'should only parse elements nested within the specified tag' do
     expect(parser.within(:article).inject([], :<<)).to eq([
         'Is our children learning?',
         'Hazel Nutt'
     ])
   end
 
-  it "should work in combination with #for_tag" do
-    expect(parser.for_tag(:name).within(:article).inject([], :<<)).to eq(['Is our children learning?'])
+  it 'should work in combination with #for_tag' do
+    expect(parser.for_tag(:name).within(:article).inject([], :<<))
+      .to eq(['Is our children learning?'])
   end
 end

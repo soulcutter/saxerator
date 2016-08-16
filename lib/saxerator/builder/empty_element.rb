@@ -4,6 +4,7 @@ module Saxerator
   module Builder
     class EmptyElement < HashElement
       def nil?; true end
+
       def !; true end
 
       def to_s
