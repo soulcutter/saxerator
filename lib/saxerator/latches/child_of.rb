@@ -6,20 +6,15 @@ module Saxerator
         @depths = []
       end
 
-      def start_element name, _
-        if depth_within_element > 0
-          increment_depth(1)
-        end
-        if @name == name
-          @depths.push 1
-        end
+      def start_element(name, _)
+        increment_depth(1) if depth_within_element > 0
+        @depths.push 1 if @name == name
       end
 
-      def end_element _
-        if depth_within_element > 0
-          increment_depth(-1)
-          @depths.pop if @depths.last == 0
-        end
+      def end_element(_)
+        return unless depth_within_element > 0
+        increment_depth(-1)
+        @depths.pop if @depths.last == 0
       end
 
       def open?
@@ -31,7 +26,7 @@ module Saxerator
       end
 
       def depth_within_element
-        @depths.size > 0 ? @depths.last : 0
+        !@depths.empty? ? @depths.last : 0
       end
     end
   end

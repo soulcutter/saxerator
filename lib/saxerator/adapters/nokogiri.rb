@@ -7,7 +7,7 @@ module Saxerator
       extend Forwardable
 
       def self.parse(source, reader)
-        parser = ::Nokogiri::XML::SAX::Parser.new(new reader)
+        parser = ::Nokogiri::XML::SAX::Parser.new(new(reader))
         parser.parse(source)
       end
 

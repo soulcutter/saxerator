@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Saxerator::DSL#for_tag" do
+describe 'Saxerator::DSL#for_tag' do
   subject(:parser) { Saxerator.parser(xml) }
 
   let(:xml) do
@@ -14,7 +14,7 @@ describe "Saxerator::DSL#for_tag" do
     eos
   end
 
-  it "should only select the specified tag" do
+  it 'should only select the specified tag' do
     expect(parser.for_tag(:blurb).inject([], :<<)).to eq(['one', 'two', 'three'])
   end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Saxerator::DSL#with_attribute" do
+describe 'Saxerator::DSL#with_attribute' do
   subject(:parser) { Saxerator.parser(xml) }
 
   let(:xml) do
@@ -15,14 +15,14 @@ describe "Saxerator::DSL#with_attribute" do
     eos
   end
 
-  it "should match tags with the specified attributes" do
+  it 'should match tags with the specified attributes' do
     expect(subject.with_attribute(:type).inject([], :<<)).to eq([
         'Leviticus Alabaster',
         'Eunice Diesel'
     ])
   end
 
-  it "should match tags with the specified attributes" do
+  it 'should match tags with the specified attributes' do
     expect(subject.with_attribute(:type, :primary).inject([], :<<)).to eq(['Leviticus Alabaster'])
   end
 end
