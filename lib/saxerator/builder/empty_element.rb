@@ -16,9 +16,7 @@ module Saxerator
       end
 
       def to_a
-        array = ArrayElement.new
-        array.name = name
-        array
+        ArrayElement.new([], name)
       end
     end
   end

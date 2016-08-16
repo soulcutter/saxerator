@@ -49,8 +49,7 @@ module Saxerator
         name = generate_key(name)
         if hash.key? name
           unless hash[name].is_a?(ArrayElement)
-            hash[name] = ArrayElement.new([hash[name]])
-            hash[name].name = name
+            hash[name] = ArrayElement.new([hash[name]], name)
           end
           hash[name] << element
         else
