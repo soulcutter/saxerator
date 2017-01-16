@@ -16,6 +16,10 @@ module Saxerator
       def to_a
         ArrayElement.new(self, name)
       end
+
+      def is_a?(k); super(k) || k == String end
+
+      def kind_of?(k); super(k) || k == String end
     end
   end
 end
