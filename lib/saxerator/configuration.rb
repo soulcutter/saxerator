@@ -21,7 +21,7 @@ module Saxerator
     end
 
     def adapter
-      require "saxerator/adapters/#{@adapter}"
+      require File.join(File.dirname(__FILE__), "../saxerator/adapters/#{@adapter}")
       Saxerator::Adapters.const_get(@adapter.to_s.capitalize, false)
     end
 
