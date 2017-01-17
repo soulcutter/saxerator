@@ -3,10 +3,7 @@ module Saxerator
     attr_writer :hash_key_generator
     attr_reader :output_type
 
-    ALLOWED_OUTPUT_TYPES = {
-      nokogiri: [:hash, :xml],
-      ox: [:hash]
-    }.freeze
+    ALLOWED_OUTPUT_TYPES = [:ox, :nokogiri]
 
     def initialize
       @adapter = :nokogiri
@@ -16,7 +13,9 @@ module Saxerator
     end
 
     def adapter=(name)
-      raise ArgumentError.new("Unknown adapter '#{name.inspect}'") unless ALLOWED_OUTPUT_TYPES.has_key?(name)
+      unless ALLOWED_OUTPUT_TYPES.include?(name)
+        raise ArgumentError, "Unknown adapter '#{name.inspect}'"
+      end
       @adapter = name
     end
 
@@ -27,10 +26,6 @@ module Saxerator
 
     def output_type=(val)
       raise ArgumentError, "Unknown output_type '#{val.inspect}'" unless Builder.valid?(val)
-      unless ALLOWED_OUTPUT_TYPES[@adapter].include?(val)
-        raise ArgumentError, "Adapter '#{adapter.inspect}' not allow to use \
-                              output_type '#{val.inspect}'"
-      end
       @output_type = val
       raise_error_if_using_put_attributes_in_hash_with_xml
     end
