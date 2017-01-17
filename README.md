@@ -21,6 +21,11 @@ Installation
     * `gem install ox`
 1. If not using the default, specify your adapter in the [Saxerator configuration](#configuration)
 
+:boom: BREAKING CHANGES :boom:
+----------------
+
+In new version for `output_type = :xml` Saxerator returns a `REXML::Document`
+You could find details on paragraph below
 
 The DSL
 -------
@@ -105,6 +110,12 @@ end
 | `ignore_namespaces!`| n/a   | n/a             | Call this method if you want to treat the XML document as if it has no namespace information. It differs slightly from `strip_namespaces!` since it deals with how the XML is processed rather than how it is output
 | `strip_namespaces!`| n/a     | user-specified  | Called with no arguments this strips all namespaces, or you may specify an arbitrary number of namespaces to strip, i.e. `config.strip_namespaces! :rss, :soapenv`
 | `put_attributes_in_hash!` | n/a     | n/a             | Call this method if you want xml attributes included as elements of the output hash - only valid with `output_type = :hash`
+
+REXML
+-----
+  For `output_type = :xml` Saxerator returns a `REXML::Document`
+  Documentation about it you could find here: [REXML::Document](http://ruby-doc.org/stdlib-2.4.0/libdoc/rexml/rdoc/REXML/Document.html)
+  If you were using `xpath` for finding node take a look on [REXML::XPath](http://ruby-doc.org/stdlib-2.4.0/libdoc/rexml/rdoc/REXML/XPath.html)
 
 Known Issues
 ------------
