@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'saxerator'
 
-  s.required_ruby_version     = '>= 2.0.0'
+  s.required_ruby_version     = '>= 2.1.0'
 
   s.files = [
     'LICENSE',

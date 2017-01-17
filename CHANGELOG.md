@@ -9,6 +9,7 @@
 * [#45](https://github.com/soulcutter/saxerator/issues/45): Drop support ruby 1.9.3 (@fanantoxa)
 * [#2](https://github.com/soulcutter/saxerator/issues/2): Implement Ox support (@soulcutter)
 * [#43](https://github.com/soulcutter/saxerator/issues/43): Update XmlBuilder to use REXML class (@fanantoxa)
+* [#46](https://github.com/soulcutter/saxerator/pull/46): Bump ruby version requirement to 2.1+ (@soulcutter)
 
 ### Bug fixes
 
