@@ -31,7 +31,7 @@ module Saxerator
 
       def block_variable
         builder = REXML::Document.new
-        builder << REXML::XMLDecl.new('1.0')
+        builder << REXML::XMLDecl.new('1.0', 'UTF-8')
         to_xml(builder)
         builder
       end
