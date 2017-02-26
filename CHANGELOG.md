@@ -10,6 +10,7 @@
 * [#2](https://github.com/soulcutter/saxerator/issues/2): Implement Ox support (@soulcutter)
 * [#43](https://github.com/soulcutter/saxerator/issues/43): Update XmlBuilder to use REXML class (@fanantoxa)
 * [#46](https://github.com/soulcutter/saxerator/pull/46): Bump ruby version requirement to 2.1+ (@soulcutter)
+* [#53](https://github.com/soulcutter/saxerator/pull/46): Implement REXML adapter, Fixes [#3](https://github.com/soulcutter/saxerator/issues/3) (@soucutter)
 
 ### Bug fixes
 
