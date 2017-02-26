@@ -9,7 +9,7 @@ task default: :spec
 namespace :spec do
   desc 'Run specs against all available adapters'
   task :adapters do |_|
-    %w(nokogiri ox).each do |adapter|
+    %w(nokogiri ox rexml).each do |adapter|
       ENV['SAXERATOR_ADAPTER'] = adapter
       Rake::Task['spec'].invoke
       ::Rake.application['spec'].reenable

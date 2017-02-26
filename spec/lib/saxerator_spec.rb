@@ -9,11 +9,11 @@ RSpec.describe Saxerator do
     context 'with a File argument' do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 
-      it 'should be able to parse it' do
+      it 'can parse it' do
         expect(parser.all).to eq('blurb' => %w(one two three))
       end
 
-      it 'should allow multiple operations on the same parser' do
+      it 'allows multiple operations on the same parser' do
         # This exposes a bug where if a File is not reset only the first
         # Enumerable method works as expected
         expect(parser.for_tag(:blurb).first).to eq('one')
@@ -31,7 +31,7 @@ RSpec.describe Saxerator do
         eos
       end
 
-      it 'should be able to parse it' do
+      it 'can parse it' do
         expect(parser.all).to eq('name' => 'Illiterates that can read', 'author' => 'Eunice Diesel')
       end
     end
@@ -108,7 +108,13 @@ RSpec.describe Saxerator do
     end
 
     context 'with strip namespaces' do
-      let(:xml) { '<ns1:foo><ns3:bar>baz</ns3:bar></ns1:foo>' }
+      let(:xml) do
+        <<-XML
+        <ns1:foo xmlns:ns1="http://foo.com" xmlns:ns3="http://baz.com">
+        <ns3:bar>baz</ns3:bar>
+        </ns1:foo>
+        XML
+      end
       subject(:parser) do
         Saxerator.parser(xml) do |config|
           config.strip_namespaces!
@@ -131,8 +137,8 @@ RSpec.describe Saxerator do
 
       context 'for specific namespaces' do
         let(:xml) do
-          <<-XML.gsub(/^ {10}/, '')
-          <ns1:foo>
+          <<-XML
+          <ns1:foo xmlns:ns1="http://foo.com" xmlns:ns2="http://bar.com" xmlns:ns3="http://baz.com">
           <ns2:bar>baz</ns2:bar>
           <ns3:bar>biz</ns3:bar>
           </ns1:foo>
@@ -159,7 +165,7 @@ RSpec.describe Saxerator do
       end
     end
 
-    it 'should be able to parse it' do
+    it 'can parse it' do
       expect(parser.all).to eq('bar' => 'baz', 'foo' => 'bar')
     end
 
@@ -171,7 +177,7 @@ RSpec.describe Saxerator do
         end
       end
 
-      context 'should raise error with' do
+      context 'raises error with' do
         specify { expect { parser }.to raise_error(ArgumentError) }
       end
     end
