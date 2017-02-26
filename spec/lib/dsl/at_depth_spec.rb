@@ -18,7 +18,7 @@ describe 'Saxerator::DSL#at_depth' do
     eos
   end
 
-  it 'should parse elements at the requested tag depth' do
+  it 'parses elements at the requested tag depth' do
     expect(parser.at_depth(2).inject([], :<<)).to eq([
       'How to eat an airplane',
       'Leviticus Alabaster',
@@ -27,7 +27,7 @@ describe 'Saxerator::DSL#at_depth' do
     ])
   end
 
-  it 'should work in combination with #for_tag' do
+  it 'works in combination with #for_tag' do
     expect(parser.at_depth(2).for_tag(:name).inject([], :<<)).to eq([
       'How to eat an airplane',
       'To wallop a horse in the face'

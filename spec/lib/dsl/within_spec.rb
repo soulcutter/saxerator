@@ -15,14 +15,14 @@ describe 'Saxerator::DSL#within' do
     eos
   end
 
-  it 'should only parse elements nested within the specified tag' do
+  it 'only parses elements nested within the specified tag' do
     expect(parser.within(:article).inject([], :<<)).to eq([
         'Is our children learning?',
         'Hazel Nutt'
     ])
   end
 
-  it 'should work in combination with #for_tag' do
+  it 'works in combination with #for_tag' do
     expect(parser.for_tag(:name).within(:article).inject([], :<<))
       .to eq(['Is our children learning?'])
   end

@@ -14,7 +14,7 @@ describe 'Saxerator::DSL#for_tag' do
     eos
   end
 
-  it 'should only select the specified tag' do
+  it 'only selects the specified tag' do
     expect(parser.for_tag(:blurb).inject([], :<<)).to eq(['one', 'two', 'three'])
   end
 end
