@@ -108,7 +108,13 @@ RSpec.describe Saxerator do
     end
 
     context 'with strip namespaces' do
-      let(:xml) { '<ns1:foo><ns3:bar>baz</ns3:bar></ns1:foo>' }
+      let(:xml) do
+        <<-XML
+        <ns1:foo xmlns:ns1="http://foo.com" xmlns:ns3="http://baz.com">
+        <ns3:bar>baz</ns3:bar>
+        </ns1:foo>
+        XML
+      end
       subject(:parser) do
         Saxerator.parser(xml) do |config|
           config.strip_namespaces!
@@ -131,8 +137,8 @@ RSpec.describe Saxerator do
 
       context 'for specific namespaces' do
         let(:xml) do
-          <<-XML.gsub(/^ {10}/, '')
-          <ns1:foo>
+          <<-XML
+          <ns1:foo xmlns:ns1="http://foo.com" xmlns:ns2="http://bar.com" xmlns:ns3="http://baz.com">
           <ns2:bar>baz</ns2:bar>
           <ns3:bar>biz</ns3:bar>
           </ns1:foo>

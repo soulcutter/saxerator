@@ -3,24 +3,24 @@ module Saxerator
     attr_writer :hash_key_generator
     attr_reader :output_type
 
-    ALLOWED_OUTPUT_TYPES = [:ox, :nokogiri]
+    ADAPTER_TYPES = [:ox, :nokogiri, :rexml]
 
     def initialize
-      @adapter = :nokogiri
+      @adapter = :rexml
       @output_type = :hash
       @put_attributes_in_hash = false
       @ignore_namespaces = false
     end
 
     def adapter=(name)
-      unless ALLOWED_OUTPUT_TYPES.include?(name)
+      unless ADAPTER_TYPES.include?(name)
         raise ArgumentError, "Unknown adapter '#{name.inspect}'"
       end
       @adapter = name
     end
 
     def adapter
-      require File.join(File.dirname(__FILE__), "../saxerator/adapters/#{@adapter}")
+      require "saxerator/adapters/#{@adapter}"
       Saxerator::Adapters.const_get(@adapter.to_s.capitalize, false)
     end
 
