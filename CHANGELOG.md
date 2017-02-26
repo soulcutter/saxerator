@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.9.8 (2017-02-25)
+
 ### New features
 
 * [#41](https://github.com/soulcutter/saxerator/issues/41): Add a changelog (@fanantoxa)
