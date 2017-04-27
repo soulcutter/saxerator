@@ -141,10 +141,6 @@ When I fetch a tag that has one or more elements, sometimes I get an `Array`, an
   > You can treat objects consistently as arrays using
   > [Ruby's built-in array conversion method](http://www.ruby-doc.org/core-2.1.1/Kernel.html#method-i-Array)
   > in the form `Array(element_or_array)`
-  >
-  > Generally you should not need to convert a parsed element to a `String` or `Hash`. One case it
-  > occasionally comes up is for elements that are sometimes-empty. Empty elements behave mostly like an
-  > empty `Hash`, however you may convert it to a more `String`-like object via `#to_s`
 
 ###  Contribution ###
 
