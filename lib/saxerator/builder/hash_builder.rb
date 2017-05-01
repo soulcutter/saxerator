@@ -16,10 +16,6 @@ module Saxerator
         @children << node
       end
 
-      def to_empty_element
-        EmptyElement.new(@name, @attributes)
-      end
-
       def to_s
         StringElement.new(@children.join, @name, @attributes)
       end
@@ -59,10 +55,7 @@ module Saxerator
 
       def block_variable
         return to_s if @text
-        if @children.count > 0 || (@attributes.count > 0 && @config.put_attributes_in_hash?)
-          return to_hash
-        end
-        to_empty_element
+        to_hash
       end
 
       def normalize_attributes(attributes)

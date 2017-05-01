@@ -15,7 +15,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do |_|
     unless adapter
-      puts 'SAXERATOR_ADAPTER weren\'t defined'
+      puts "SAXERATOR_ADAPTER was not defined, using default"
       next
     end
     puts "Using '#{adapter}' for parsing"

@@ -71,29 +71,14 @@ describe 'Saxerator (default) hash format' do
   context 'parsing an empty element' do
     subject(:element) { entry['media:thumbnail'] }
 
-    it 'behaves somewhat like nil' do
-      expect(element).to be_nil
-      expect(!element).to be true
-      expect(element.to_s).to eq('')
-      expect(element.to_h).to eq({})
-    end
-
     it { is_expected.to be_empty }
 
     it 'has attributes' do
       expect(element.attributes.keys).to eq ['url']
     end
 
-    [:to_s, :to_h, :to_a].each do |conversion|
-      it "preserves the element name through ##{conversion}" do
-        expect(element.send(conversion).name).to eq 'media:thumbnail'
-      end
-    end
-
-    [:to_s, :to_h].each do |conversion|
-      it "preserves attributes through ##{conversion}" do
-        expect(element.send(conversion).attributes.keys).to eq ['url']
-      end
+    it 'has a name' do
+      expect(element.name).to eq 'media:thumbnail'
     end
   end
 end
