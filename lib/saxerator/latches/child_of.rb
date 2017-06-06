@@ -14,7 +14,7 @@ module Saxerator
       def end_element(_)
         return unless depth_within_element > 0
         increment_depth(-1)
-        @depths.pop if @depths[-1] == 0
+        @depths.pop if @depths[-1].zero?
       end
 
       def open?

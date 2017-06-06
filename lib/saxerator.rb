@@ -23,6 +23,9 @@ require 'saxerator/latches/child_of'
 require 'saxerator/latches/with_attributes'
 
 module Saxerator
+  class ParseException < StandardError
+  end
+
   extend self
 
   def parser(xml)

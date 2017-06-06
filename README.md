@@ -39,6 +39,8 @@ for added clarity).
 | `with_attribute(name, value)` | Elements that have an attribute with a given `name` and `value`. If no `value` is given, matches any element with the specified attribute name present
 | `with_attributes(attrs)` | Similar to `with_attribute` except takes an Array or Hash indicating the attributes to match
 
+On any parsing error it'll raise an `Saxerator::ParseException` exception with the message that describe what is wrong on XML document.
+
 Examples
 --------
 ```ruby

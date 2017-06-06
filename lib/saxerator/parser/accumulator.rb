@@ -21,7 +21,7 @@ module Saxerator
       end
 
       def characters(string)
-        @stack[-1].add_node(string) unless string.strip.length == 0
+        @stack[-1].add_node(string) unless string.strip.empty?
       end
 
       def accumulating?

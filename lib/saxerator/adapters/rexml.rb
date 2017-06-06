@@ -11,6 +11,8 @@ module Saxerator
       def self.parse(source, reader)
         handler = new(reader)
         REXML::Document.parse_stream(source, handler)
+      rescue REXML::ParseException => message
+        raise Saxerator::ParseException, message
       end
 
       def initialize(reader)
@@ -36,7 +38,6 @@ module Saxerator
       def strip_namespace(name)
         name.split(':').last
       end
-
     end
   end
 end

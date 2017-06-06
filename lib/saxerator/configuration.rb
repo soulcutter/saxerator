@@ -3,7 +3,7 @@ module Saxerator
     attr_writer :hash_key_generator
     attr_reader :output_type
 
-    ADAPTER_TYPES = [:ox, :nokogiri, :rexml]
+    ADAPTER_TYPES = %i[ox nokogiri rexml oga].freeze
 
     def initialize
       @adapter = :rexml
@@ -39,7 +39,7 @@ module Saxerator
     end
 
     def hash_key_normalizer
-      @hash_key_normalizer ||= -> (x) { x.to_s }
+      @hash_key_normalizer ||= ->(x) { x.to_s }
     end
 
     def hash_key_generator
@@ -47,15 +47,15 @@ module Saxerator
     end
 
     def symbolize_keys!
-      @hash_key_generator = -> (x) { hash_key_normalizer.call(x).to_sym }
+      @hash_key_generator = ->(x) { hash_key_normalizer.call(x).to_sym }
     end
 
     def strip_namespaces!(*namespaces)
       if namespaces.any?
         matching_group = namespaces.join('|')
-        @hash_key_normalizer = -> (x) { x.to_s.gsub(/(#{matching_group}):/, '') }
+        @hash_key_normalizer = ->(x) { x.to_s.gsub(/(#{matching_group}):/, '') }
       else
-        @hash_key_normalizer = -> (x) { x.to_s.gsub(/\w+:/, '') }
+        @hash_key_normalizer = ->(x) { x.to_s.gsub(/\w+:/, '') }
       end
     end
 
