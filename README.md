@@ -142,6 +142,10 @@ When I fetch a tag that has one or more elements, sometimes I get an `Array`, an
   > [Ruby's built-in array conversion method](http://www.ruby-doc.org/core-2.1.1/Kernel.html#method-i-Array)
   > in the form `Array(element_or_array)`
 
+Why Active Record fails when I'm passing String value to the query?
+
+  > Saxerator doesn't return Array, Hash or String to you. But you can convert it to needed type by calling `.to_<type>` method as you usually do.
+
 ###  Contribution ###
 
 For running tests for all parsers run `rake spec:adapters`
