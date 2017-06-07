@@ -18,6 +18,10 @@ module Saxerator
       end
 
       def to_h; self end
+
+      def is_a?(k); super(k) || k == Hash end
+
+      def kind_of?(k); super(k) || k == Hash end
     end
   end
 end

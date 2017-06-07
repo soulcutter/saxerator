@@ -11,6 +11,10 @@ module Saxerator
       end
 
       def to_a; self end
+
+      def is_a?(k); super(k) || k == Array end
+
+      def kind_of?(k); super(k) || k == Array end
     end
   end
 end
