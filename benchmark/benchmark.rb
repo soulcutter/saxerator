@@ -9,7 +9,7 @@ unless File.exist?(file)
 end
 file = File.new(file)
 
-ADAPTERS = [:nokogiri, :ox].freeze
+ADAPTERS = %i[nokogiri ox oga rexml].freeze
 
 class SaxeratorBenchmark
   def initialize(file)

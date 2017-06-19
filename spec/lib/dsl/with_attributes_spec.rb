@@ -23,7 +23,7 @@ describe 'Saxerator::DSL#with_attributes' do
   end
 
   it 'matches tags which have the specified attributes' do
-    expect(parser.with_attributes(%w(type ridiculous)).inject([], :<<))
+    expect(parser.with_attributes(%w[type ridiculous]).inject([], :<<))
       .to eq(['Leviticus Alabaster', 'Eunice Diesel'])
   end
 

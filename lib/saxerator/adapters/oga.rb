@@ -7,8 +7,10 @@ module Saxerator
       extend Forwardable
 
       def self.parse(source, reader)
-        parser = ::Oga::XML::SaxParser.new(new(reader), source)
+        parser = ::Oga::XML::SaxParser.new(new(reader), source, strict: true)
         parser.parse
+      rescue LL::ParserError => message
+        raise Saxerator::ParseException, message
       end
 
       def initialize(reader)
@@ -36,7 +38,7 @@ module Saxerator
         attrs.map { |k, v| [k.gsub(NAMESPACE_MATCHER, ''), v] }
       end
 
-      NAMESPACE_MATCHER = /\A.+:/.freeze
+      NAMESPACE_MATCHER = /\A.+:/
     end
   end
 end

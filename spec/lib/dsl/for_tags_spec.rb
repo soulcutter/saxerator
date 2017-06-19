@@ -14,7 +14,7 @@ describe 'Saxerator::DSL#for_tags' do
   end
 
   it 'only selects the specified tags' do
-    expect(parser.for_tags(%w(blurb1 blurb3)).inject([], :<<)).to eq(['one', 'three'])
+    expect(parser.for_tags(%w[blurb1 blurb3]).inject([], :<<)).to eq(['one', 'three'])
   end
 
   it 'raises an ArgumentError for a non-Array argument' do

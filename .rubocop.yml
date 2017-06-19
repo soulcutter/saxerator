@@ -33,7 +33,7 @@ Style/SymbolProc:
 Style/RegexpLiteral:
   Enabled: false
 
-Style/IndentArray:
+Layout/IndentArray:
   Enabled: false
 
 Style/WordArray:
@@ -43,4 +43,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Style/StringLiterals:
+  Enabled: false
+
+Style/GuardClause:
   Enabled: false

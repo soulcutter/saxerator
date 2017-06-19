@@ -54,6 +54,10 @@ module Saxerator
 
       alias cdata text
 
+      def error(message, _, _)
+        raise Saxerator::ParseException, message
+      end
+
       private
 
       def reset!

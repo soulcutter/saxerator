@@ -2,6 +2,7 @@
 
 ## master (unreleased)
 
+* [#55](https://github.com/soulcutter/saxerator/issues/55): Ox SAX Parser not Raising Errors (@fanantoxa)
 * [#56](https://github.com/soulcutter/saxerator/issues/56): Implement Oga support (@soulcutter)
 * [#57](https://github.com/soulcutter/saxerator/issues/57): Remove special case for EmptyElement (@soulcutter)
 

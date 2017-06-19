@@ -10,7 +10,7 @@ RSpec.describe Saxerator do
       let(:xml) { fixture_file('flat_blurbs.xml') }
 
       it 'can parse it' do
-        expect(parser.all).to eq('blurb' => %w(one two three))
+        expect(parser.all).to eq('blurb' => %w[one two three])
       end
 
       it 'allows multiple operations on the same parser' do
@@ -33,6 +33,35 @@ RSpec.describe Saxerator do
 
       it 'can parse it' do
         expect(parser.all).to eq('name' => 'Illiterates that can read', 'author' => 'Eunice Diesel')
+      end
+    end
+
+    context 'raise exception when ' do
+      let(:broken_xml_1) do
+        <<-eos
+        <book>
+          <name>Illiterates that can read</name>
+          <author>Eunice Diesel</author>
+        eos
+      end
+
+      let(:broken_xml_2) do
+        <<-eos
+        <book>
+          <name>Illiterates that can read
+          <author>Eunice Diesel</author>
+        </book>
+        eos
+      end
+
+      unless ENV['SAXERATOR_ADAPTER'] == "rexml"
+        it 'ending node not found' do
+          expect { Saxerator.parser(broken_xml_1).all }.to raise_error(Saxerator::ParseException)
+        end
+      end
+
+      it 'node in the middle not closed' do
+        expect { Saxerator.parser(broken_xml_2).all }.to raise_error(Saxerator::ParseException)
       end
     end
   end

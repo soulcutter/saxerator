@@ -29,6 +29,10 @@ module Saxerator
         end_element(name)
       end
 
+      def error(message)
+        raise Saxerator::ParseException, message
+      end
+
       private
 
       def strip_namespace(attrs)

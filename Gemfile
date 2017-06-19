@@ -7,4 +7,4 @@ group :coverage do
   gem 'simplecov'
 end
 
-gem 'pry', platforms: [:ruby_21, :ruby_22, :ruby_23]
+gem 'pry', platforms: %i[ruby_21 ruby_22 ruby_23 ruby_24]
