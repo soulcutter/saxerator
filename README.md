@@ -40,6 +40,7 @@ for added clarity).
 | `with_attributes(attrs)` | Similar to `with_attribute` except takes an Array or Hash indicating the attributes to match
 
 On any parsing error it'll raise an `Saxerator::ParseException` exception with the message that describe what is wrong on XML document.
+**Warning** Rexml won't raise and error if root elent wasn't closed. (will be fixed on ruby 2.5)
 
 Examples
 --------

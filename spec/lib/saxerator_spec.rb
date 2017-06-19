@@ -54,8 +54,10 @@ RSpec.describe Saxerator do
         eos
       end
 
-      it 'ending node not found' do
-        expect { Saxerator.parser(broken_xml_1).all }.to raise_error(Saxerator::ParseException)
+      unless ENV['SAXERATOR_ADAPTER'] == "rexml"
+        it 'ending node not found' do
+          expect { Saxerator.parser(broken_xml_1).all }.to raise_error(Saxerator::ParseException)
+        end
       end
 
       it 'node in the middle not closed' do
