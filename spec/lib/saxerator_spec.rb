@@ -19,6 +19,12 @@ RSpec.describe Saxerator do
         expect(parser.for_tag(:blurb).first).to eq('one')
         expect(parser.for_tag(:blurb).first).to eq('one')
       end
+
+      it 'call each without block returns enumerator' do
+        enumerator = parser.for_tag(:blurb).each
+        expect(enumerator).to be_an(Enumerator)
+        expect(enumerator.to_a).to eq(%w(one two three))
+      end
     end
 
     context 'with a String argument' do
@@ -33,6 +39,12 @@ RSpec.describe Saxerator do
 
       it 'can parse it' do
         expect(parser.all).to eq('name' => 'Illiterates that can read', 'author' => 'Eunice Diesel')
+      end
+
+      it 'call each without block returns enumerator' do
+        enumerator = parser.for_tag(:name).each
+        expect(enumerator).to be_an(Enumerator)
+        expect(enumerator.to_a).to eq(['Illiterates that can read'])
       end
     end
   end
