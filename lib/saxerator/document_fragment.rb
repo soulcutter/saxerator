@@ -10,6 +10,8 @@ module Saxerator
     end
 
     def each(&block)
+      return to_enum unless block_given?
+
       # Always have to start at the beginning of a File
       @source.rewind if @source.respond_to?(:rewind)
 
