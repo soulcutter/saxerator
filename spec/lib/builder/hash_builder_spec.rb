@@ -82,4 +82,16 @@ describe 'Saxerator (default) hash format' do
       expect(element.name).to eq 'media:thumbnail'
     end
   end
+
+  describe 'Saxerator elements with both text and element children format' do
+    let(:xml){ fixture_file('mixed_text_with_elements.xml') }
+    subject(:description) { Saxerator.parser(xml).for_tag(:description).first }
+
+    specify do
+      expect(description.map(&:class))
+        .to match_array([Saxerator::Builder::StringElement, Saxerator::Builder::HashElement])
+    end
+
+    specify{ expect(subject.first).to eq "This is a description." }
+  end
 end
