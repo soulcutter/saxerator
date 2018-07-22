@@ -89,7 +89,20 @@ describe 'Saxerator (default) hash format' do
 
     specify do
       expect(description.map(&:class))
-        .to match_array([Saxerator::Builder::StringElement, Saxerator::Builder::HashElement])
+        .to match_array([
+          Saxerator::Builder::StringElement,
+          Saxerator::Builder::ArrayElement,
+          Saxerator::Builder::StringElement,
+          Saxerator::Builder::HashElement
+        ])
+    end
+
+    specify do
+      expect(description.last.name).to eq 'p'
+    end
+
+    specify do
+      expect(description.last.attributes).to include('id' => '3')
     end
 
     specify{ expect(subject.first).to eq "This is a description." }
