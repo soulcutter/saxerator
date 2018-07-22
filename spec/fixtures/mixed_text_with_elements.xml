@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description>This is a description.<p> A paragraph within the description.<fig> A figure within the paragraph.</fig></p></description>
+<description>This is a description.<p id='1'>A paragraph within the description.<fig id='1'> A figure within the paragraph.</fig></p><p id='2'>Another paragraph.</p><p id='3'><fig id='2'> A figure within the paragraph.</fig></p></description>
