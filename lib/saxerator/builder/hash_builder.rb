@@ -1,4 +1,3 @@
-require 'pry'
 module Saxerator
   module Builder
     class HashBuilder
