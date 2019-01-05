@@ -64,7 +64,7 @@ module Saxerator
 
       def block_variable
         return to_hash unless @children.any? { |c| c.kind_of?(String) }
-        return to_s if @children.size == 1
+        return to_s if @children.all? { |c| c.kind_of?(String) }
 
         to_array
       end
