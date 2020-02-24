@@ -1,4 +1,4 @@
-Saxerator [![Build Status](https://secure.travis-ci.org/soulcutter/saxerator.png?branch=master)](http://travis-ci.org/soulcutter/saxerator) [![Code Climate](https://codeclimate.com/github/soulcutter/saxerator.png)](https://codeclimate.com/github/soulcutter/saxerator)
+Saxerator [![Code Climate](https://codeclimate.com/github/soulcutter/saxerator.png)](https://codeclimate.com/github/soulcutter/saxerator)
 =========
 
 Saxerator is a streaming xml-to-hash parser designed for working with very large xml files by
@@ -158,4 +158,4 @@ Saxerator was inspired by - but not affiliated with - [nori](https://github.com/
 [Practicing Ruby](http://practicingruby.com/)
 
 #### Legal Stuff ####
-Copyright © 2012-2017 Bradley Schaefer. MIT License (see LICENSE file).
+Copyright © 2012-2020 Bradley Schaefer. MIT License (see LICENSE file).
