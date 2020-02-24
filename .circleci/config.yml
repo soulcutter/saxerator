@@ -1,18 +1,14 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.2.1
 
 jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
-    executor: default
     steps:
       - checkout
+      - ruby/install-deps
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
-      - run:
-          name: Test with all adapters
-          command: bundle exec rake spec:adapters 
+          name: Run tests across all adapters
+          command: "bundle exec rake spec:adapters"
