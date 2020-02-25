@@ -8,7 +8,12 @@ jobs:
       - image: circleci/ruby:2.6.3-stretch-node
     steps:
       - checkout
+      - run:
+          name: Resolve ruby bundle
+          command: bundle lock
+      - ruby/load-cache
       - ruby/install-deps
+      - ruby/save-cache
       - run:
           name: Run tests across all adapters
           command: "bundle exec rake spec:adapters"
