@@ -8,11 +8,9 @@ module Saxerator
         @name = config.generate_key_for(name)
         @attributes = normalize_attributes(attributes)
         @children = []
-        @text = false
       end
 
       def add_node(node)
-        @text = true if node.is_a? String
         @children << node
       end
 
@@ -41,6 +39,17 @@ module Saxerator
         hash
       end
 
+      def to_array
+        arr = @children.map do |child|
+          if child.kind_of?(String)
+            StringElement.new(child)
+          else
+            child.block_variable
+          end
+        end
+        ArrayElement.new(arr, @name, @attributes)
+      end
+
       def add_to_hash_element(hash, name, element)
         name = generate_key(name)
         if hash.key? name
@@ -54,8 +63,10 @@ module Saxerator
       end
 
       def block_variable
-        return to_s if @text
-        to_hash
+        return to_hash unless @children.any? { |c| c.kind_of?(String) }
+        return to_s if @children.all? { |c| c.kind_of?(String) }
+
+        to_array
       end
 
       def normalize_attributes(attributes)
