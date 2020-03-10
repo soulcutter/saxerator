@@ -42,7 +42,7 @@ module Saxerator
       def to_array
         arr = @children.map do |child|
           if child.kind_of?(String)
-            StringElement.new(child, nil, nil)
+            StringElement.new(child)
           else
             child.block_variable
           end

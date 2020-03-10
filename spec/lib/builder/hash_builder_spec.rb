@@ -84,27 +84,21 @@ describe 'Saxerator (default) hash format' do
   end
 
   describe 'Saxerator elements with both text and element children format' do
-    let(:xml){ fixture_file('mixed_text_with_elements.xml') }
+    let(:xml) { fixture_file('mixed_text_with_elements.xml') }
     subject(:description) { Saxerator.parser(xml).for_tag(:description).first }
 
-    specify do
+    it "emits an array of child elements in the order they appear in the document", :aggregate_failures do
       expect(description.map(&:class))
-        .to match_array([
+        .to eq([
           Saxerator::Builder::StringElement,
           Saxerator::Builder::ArrayElement,
           Saxerator::Builder::StringElement,
           Saxerator::Builder::HashElement
         ])
-    end
-
-    specify do
+      # verifying the nodes are what we expect them to be
       expect(description.last.name).to eq 'p'
-    end
-
-    specify do
       expect(description.last.attributes).to include('id' => '3')
+      expect(subject.first).to eq "This is a description."
     end
-
-    specify{ expect(subject.first).to eq "This is a description." }
   end
 end

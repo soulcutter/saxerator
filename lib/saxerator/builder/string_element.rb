@@ -7,7 +7,7 @@ module Saxerator
       attr_accessor :attributes
       attr_accessor :name
 
-      def initialize(str, name, attributes)
+      def initialize(str, name = nil, attributes = nil)
         @name = name
         @attributes = attributes
         super(str)
