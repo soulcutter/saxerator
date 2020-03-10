@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
     'Gemfile',
     'Rakefile',
     '.gitignore',
-    '.travis.yml'
+    '.circleci/config.yml'
   ] +
     Dir.glob('lib/**/*.rb') +
     Dir.glob('spec/**/*.*') +
