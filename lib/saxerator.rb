@@ -4,6 +4,7 @@ require 'saxerator/sax_handler'
 require 'saxerator/dsl'
 require 'saxerator/full_document'
 require 'saxerator/document_fragment'
+require 'saxerator/hash_key_processor'
 require 'saxerator/configuration'
 
 require 'saxerator/builder'
