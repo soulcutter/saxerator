@@ -1,19 +1,17 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.2.1
+  ruby: circleci/ruby@1.1.1
 
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/ruby:2.7.2-buster-node
     steps:
       - checkout
       - run:
           name: Resolve ruby bundle
           command: bundle lock
-      - ruby/load-cache
       - ruby/install-deps
-      - ruby/save-cache
       - run:
           name: Run tests across all adapters
           command: "bundle exec rake spec:adapters"
