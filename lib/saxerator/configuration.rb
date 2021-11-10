@@ -1,7 +1,6 @@
 module Saxerator
   class Configuration
-    attr_writer :hash_key_generator
-    attr_reader :output_type
+    attr_reader :output_type, :hash_key_processor
 
     ADAPTER_TYPES = %i[ox nokogiri rexml oga].freeze
 
@@ -10,6 +9,7 @@ module Saxerator
       @output_type = :hash
       @put_attributes_in_hash = false
       @ignore_namespaces = false
+      @hash_key_processor = Saxerator::HashKeyProcessor.new
     end
 
     def adapter=(name)
@@ -34,29 +34,12 @@ module Saxerator
       @_output_type ||= Builder.to_class(@output_type)
     end
 
-    def generate_key_for(val)
-      hash_key_generator.call val
-    end
-
-    def hash_key_normalizer
-      @hash_key_normalizer ||= ->(x) { x.to_s }
-    end
-
-    def hash_key_generator
-      @hash_key_generator || hash_key_normalizer
-    end
-
     def symbolize_keys!
-      @hash_key_generator = ->(x) { hash_key_normalizer.call(x).to_sym }
+      @hash_key_processor.symbolize_keys = true
     end
 
     def strip_namespaces!(*namespaces)
-      if namespaces.any?
-        matching_group = namespaces.join('|')
-        @hash_key_normalizer = ->(x) { x.to_s.gsub(/(#{matching_group}):/, '') }
-      else
-        @hash_key_normalizer = ->(x) { x.to_s.gsub(/\w+:/, '') }
-      end
+      @hash_key_processor.strip_namespaces!(*namespaces)
     end
 
     def ignore_namespaces?

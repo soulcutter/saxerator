@@ -5,7 +5,8 @@ module Saxerator
 
       def initialize(config, name, attributes)
         @config = config
-        @name = config.generate_key_for(name)
+        @hash_key_processor = config.hash_key_processor
+        @name = @hash_key_processor.generate(name)
         @attributes = normalize_attributes(attributes)
         @children = []
       end
@@ -74,7 +75,7 @@ module Saxerator
       end
 
       def generate_key(name)
-        @config.generate_key_for(name)
+        @hash_key_processor.generate(name)
       end
     end
   end
