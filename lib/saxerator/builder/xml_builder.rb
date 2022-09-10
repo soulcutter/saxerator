@@ -13,8 +13,12 @@ module Saxerator
         @text = false
       end
 
+      REXML_ENCODING = 'UTF-8'
       def add_node(node)
-        @text = true if node.is_a? String
+        if node.is_a? String
+          @text = true 
+          node.encode!(REXML_ENCODING) unless node.encoding.name == REXML_ENCODING
+        end
         @children << node
       end
 
